@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import About from './About';
 import Home from './Home';
+import LetterSelect from './LetterSelect';
 
 interface IAppState {
   Letters: string[];
@@ -71,6 +72,9 @@ class App extends React.PureComponent<{},IAppState> {
             <li>
               <Link to="/about">About</Link>
             </li>
+            <li>
+              <Link to="/letter-select">Select Letters</Link>
+            </li>
           </ul>
           <hr />
           <Switch>
@@ -79,6 +83,9 @@ class App extends React.PureComponent<{},IAppState> {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route path="/letter-select">
+              <LetterSelect />
             </Route>
           </Switch>
         </div>
