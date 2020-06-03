@@ -5,7 +5,8 @@ import * as serviceWorker from './serviceWorker';
 import GoogleLogin from 'react-google-login';
 
 import Auth from './secret';
-import './styles/custom.css'
+import './styles/main.css';
+import './styles/custom.css';
 
 interface ILoadAppState {
   IsLoggedIn: Boolean;
@@ -55,7 +56,7 @@ class LoadApp extends React.Component<{}, ILoadAppState> {
             buttonText="Login with your Google account..."
             onSuccess={() => this.onSuccess()}
             onFailure={(response: any) => this.onFailure(response)}
-            cookiePolicy={'none'} />
+            cookiePolicy={'single_host_origin'} />
       )      
     }
   }
