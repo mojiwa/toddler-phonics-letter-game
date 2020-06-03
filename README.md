@@ -19,5 +19,17 @@ https://tailwindcss.com/docs/
 Once cloned, navigate to the directory and run:  
 `npm install`
 
-Once all dependencies have been installed, simply run:  
+You will need to provide a secret.ts file that will contain a Google Client ID which is required for the login authentication.
+Create a file in ./src called `secret.ts`
+Populate it with the following:
+```
+export default {
+    Google: {      
+      CLIENT_ID: "YOUR_CLIENT_ID",
+      CLIENT_SECRET: "NOT_REQUIRED_CURRENTLY"
+    }
+}
+```
+
+Then, simply run:  
 `npm run start`
