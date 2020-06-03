@@ -1,8 +1,7 @@
 # Toddler Phonics Letter Game
 A simple web app designed to teach toddlers their letters using phonics.  
 
-Parents select objects from a predefined list that their child is familiar with and children are then presented with images and letters.  
-The aim is for the child to select the corresponding first letter of the object out of a possible 3 choices.  
+Parents select objects from a predefined list that their child is familiar with and children are then presented with images and letters. The aim is for the child to select the corresponding first letter of the object out of a possible 3 choices.  
 
 Hover over or tap the object to hear how it is spoken.  
 Hover over or tap the letter to listen to its phonic pronunciation.  
