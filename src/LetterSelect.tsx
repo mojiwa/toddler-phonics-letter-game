@@ -4,7 +4,7 @@ import Letter from './components/Letter';
 export default class LetterSelect extends React.PureComponent<{},{}> {
   render() {
     return(
-      <div className='flex flex-wrap'>
+      <div className='flex-col'>
         {LETTERS.map(l => (
           <Letter key={l} Letter={l} />
         ))}

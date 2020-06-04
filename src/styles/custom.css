@@ -8,15 +8,27 @@ body {
 }
 
 .letter-div > svg {
-    height: 200px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
 }
 
 .letter-div > svg:hover {
-    fill: cadetblue;
-    stroke: black;
     animation: shuffle-letter 0.6s ease-out;
     transform-origin: center;
+}
+
+.letter-div > svg:hover > .letter-fill {
+    fill: cadetblue;    
+}
+
+.letter-fill {
+    fill: crimson;
+}
+
+.letter-border {
+    fill: none;
+    stroke: black;
+    stroke-linejoin: round;
 }
 
 @keyframes shuffle-letter {
@@ -29,5 +41,4 @@ body {
     60% { transform: rotate(0deg);}
     70% { transform: rotate(-5deg);}
     80% { transform: rotate(0deg);}
-
 }
