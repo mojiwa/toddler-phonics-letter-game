@@ -37,16 +37,20 @@ li {
     width: 200px;
 }
 
-.letter-div:hover > div > svg {
-    animation: shake-letter 0.6s ease-out;
-    transform-origin: center;
+@media (hover) {
+    .letter-div:hover > div > svg {
+        animation: shake-letter 0.6s ease-out;
+        transform-origin: center;
+    }
 }
 
-.letter-div:hover > div > svg > .letter-fill {
-    fill: cadetblue;    
+@media (hover) {
+    .letter-div:hover > div > svg > .letter-fill {
+        fill: cadetblue;    
+    }
 }
 
-.letter-rotated {
+.letter-rotated > svg {
     transform: rotateY(35deg);
 }
 
@@ -70,4 +74,14 @@ li {
     60% { transform: rotate(0deg);}
     70% { transform: rotate(-5deg);}
     80% { transform: rotate(0deg);}
+}
+
+.letter-selected > div > svg > .letter-fill {
+    fill: wheat;
+}
+
+@media (hover) {
+    .letter-selected:hover > div > svg > .letter-fill {
+        fill: wheat;
+    }
 }

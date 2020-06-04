@@ -22,49 +22,49 @@ export default class PhonicsSets extends React.PureComponent<ILetterSelectProps,
         <br />
         Set 1
         <ul>
-          {this.props.LetterData.filter(las => las.Set === 1).map(las => (
-            <li key={las.Letter}>
-              <Letter LetterData={las} Size='small' LanguagePreference={this.props.LanguageSelection}/>
+          {this.props.LetterData.filter(l => l.Set === 1).map(l => (
+            <li key={l.Letter}>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true}/>
             </li>
           ))}
         </ul>       
         Set 2 
         <ul>
-          {this.props.LetterData.filter(las => las.Set === 2).map(las => (
-            <li key={las.Letter}>
-              <Letter LetterData={las} Size='small' LanguagePreference={this.props.LanguageSelection}/>
+          {this.props.LetterData.filter(l => l.Set === 2).map(l => (
+            <li key={l.Letter}>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true}/>
             </li>
           ))}
         </ul>
         Set 3
         <ul>
-          {this.props.LetterData.filter(las => las.Set === 3).map(las => (
-            <li key={las.Letter}>
-              <Letter LetterData={las} Size='small' LanguagePreference={this.props.LanguageSelection}/>
+          {this.props.LetterData.filter(l => l.Set === 3).map(l => (
+            <li key={l.Letter}>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true}/>
             </li>
           ))}
         </ul>
         Set 4
         <ul>
-          {this.props.LetterData.filter(las => las.Set === 4).map(las => (
-            <li key={las.Letter}>
-              <Letter LetterData={las} Size='small' LanguagePreference={this.props.LanguageSelection}/>
+          {this.props.LetterData.filter(l => l.Set === 4).map(l => (
+            <li key={l.Letter}>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true}/>
             </li>
           ))}
         </ul>
         Set 5
         <ul>
-          {this.props.LetterData.filter(las => las.Set === 5).map(las => (
-            <li key={las.Letter}>
-              <Letter LetterData={las} Size='small' LanguagePreference={this.props.LanguageSelection}/>
+          {this.props.LetterData.filter(l => l.Set === 5).map(l => (
+            <li key={l.Letter}>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true}/>
             </li>
           ))}
         </ul>
         Set 6
         <ul>
-          {this.props.LetterData.filter(las => las.Set === 6).map(las => (
-            <li key={las.Letter}>
-              <Letter LetterData={las} Size='small' LanguagePreference={this.props.LanguageSelection}/>
+          {this.props.LetterData.filter(l => l.Set === 6).map(l => (
+            <li key={l.Letter}>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true}/>
             </li>
           ))}
         </ul>        

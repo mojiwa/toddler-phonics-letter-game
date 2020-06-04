@@ -106,22 +106,24 @@ class App extends React.PureComponent<{},IAppState> {
     return (
       <Router>
         <div>
-          <ul>
-            <li className='p-2'>
-              <Link to="/">Home</Link>
-            </li>
-            <li className='p-2'>
-              <Link to="/about">About</Link>
-            </li>
-            <li className='p-2'>
-              <Link to="/phonics-sets">Phonics Sets</Link>
-            </li>
-          </ul>
-          <label>Select Language:</label>
-          <select id='language' name='language' onChange={(e) => this.onLanguageSelect(e.target.value)} value={this.state.LanguageSelection}>
-            <option value={0}>British</option>
-            <option value={1}>American</option>
-          </select>
+          <div className='flex p-2'>
+            <ul>
+              <li className='p-2'>
+                <Link to="/">Home</Link>
+              </li>
+              <li className='p-2'>
+                <Link to="/about">About</Link>
+              </li>
+              <li className='p-2'>
+                <Link to="/phonics-sets">Phonics Sets</Link>
+              </li>
+            </ul>
+            <label className='ml-2'>Select Language:</label>
+            <select id='language' name='language' onChange={(e) => this.onLanguageSelect(e.target.value)} value={this.state.LanguageSelection}>
+              <option value={0}>British</option>
+              <option value={1}>American</option>
+            </select>
+          </div>
           <hr />
           <Switch>
             <Route exact path="/">

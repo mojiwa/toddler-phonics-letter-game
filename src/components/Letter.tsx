@@ -27,11 +27,18 @@ import {ReactComponent as Y} from '../images/y.svg';
 import {ReactComponent as Z} from '../images/z.svg';
 import { ILetterData, LanguageSelection } from '../interfaces';
 
+var timer: NodeJS.Timeout;
 
 interface ILetterProps {
   LetterData: ILetterData;
   Size: string;
   LanguagePreference: LanguageSelection;
+  PlayAudio: boolean;
+}
+
+interface ILetterState {
+  Selected: boolean;
+  AudioPlayed: boolean;
 }
 
 /** 
@@ -39,6 +46,10 @@ interface ILetterProps {
  * along with the selected height.
 */
 export default class Letter extends React.PureComponent<ILetterProps, {}> {
+  readonly state = {
+    Selected: false,
+    AudioPlayed: false
+  }
 
   // Render the letter based on the props
   renderLetter(letter: string = this.props.LetterData.Letter) {
@@ -100,13 +111,17 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
     }
   }
 
-  // Plays the sound of the selected letter dependent upon
-  // language preference
-  playAudio() {    
+  // On long-click, plays the sound of the selected 
+  // letter dependent upon language preference.
+  playAudio = () => {
+    if (!this.props.PlayAudio)
+      return;
     var audio = new Audio(this.props.LanguagePreference === 
       LanguageSelection.British ? 
         this.props.LetterData.BritishAudioUrl : 
         this.props.LetterData.AmericanAudioUrl);    
+    // Play the sound for 1 second (the sound clip is longer than this)
+    // and then reset
     setTimeout(() => {
       audio.play();
       setTimeout(() => {
@@ -117,11 +132,31 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
     audio.play();
   }
 
+  onSelected = () => {
+    this.setState({Selected: !this.state.Selected});
+  }
+
+  // To detect a long click, we set a timeout on mousedown. 
+  // If that timer reaches 1sec, we play the audio.
+  onMouseDownEventRouter = () => {
+    timer = setTimeout(() => { this.playAudio(); this.setState({AudioPlayed: true}); }, 1000);
+  }
+  
+  // On mouse up, we check to see if the timer was hit and
+  // the audio was played. If not, that means it was a short-click
+  // and so we select the letter.
+  onMouseUp = () => {
+    clearTimeout(timer);
+    if(!this.state.AudioPlayed)
+      this.onSelected();
+    this.setState({AudioPlayed: false});
+  }
+
   render() {
     // render single letter sounds only
     if (this.props.LetterData.Letter.length === 1) {
       return(
-        <div className={`letter-div`} onClick={() => this.playAudio()} >
+        <div className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onMouseDown={this.onMouseDownEventRouter} onMouseUp={this.onMouseUp}>
           <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter()}</div>
         </div>        
       )
@@ -130,7 +165,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       if (this.props.LetterData.Letter.includes('_')) {
         return(
           <div>
-            <div className='letter-div' onClick={() => this.playAudio()}>
+            <div className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onMouseDown={this.onMouseDownEventRouter} onMouseUp={this.onMouseUp}>
               <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1).toLowerCase())}</div>
               <div className={`letter-rotated -ml-10 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(2, 1).toLowerCase())}</div>
             </div>
@@ -138,7 +173,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       )} else {
         // render two letter sounds such as 'ai' or 'th'
         return(      
-          <div className='letter-div' onClick={() => this.playAudio()}>
+          <div className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onMouseDown={this.onMouseDownEventRouter} onMouseUp={this.onMouseUp}>
             <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(0, 1))}</div>
             <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1))}</div>
           </div>                
