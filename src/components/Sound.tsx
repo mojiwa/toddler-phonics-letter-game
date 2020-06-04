@@ -28,7 +28,7 @@ import {ReactComponent as Z} from '../images/z.svg';
 
 
 interface ILetterProps {
-  Letter: string;
+  Sound: string;
   Size: string;
 }
 
@@ -36,75 +36,94 @@ interface ILetterProps {
  * Displays the corresponding .svg for the letter passed in the props
  * along with the selected height.
 */
-export default class Letter extends React.PureComponent<ILetterProps, {}> {
+export default class Sound extends React.PureComponent<ILetterProps, {}> {
   readonly state = {
 
   }
 
-  renderSwitch() {
-    switch (this.props.Letter) {
-      case 'A':
-        return <A />
-      case 'B':
+  renderSingleLetterSound(sound: string = this.props.Sound) {
+    switch (sound) {
+      case 'a':
+        return <A/>
+      case 'b':
         return <B/>
-      case 'C':
+      case 'c':
         return <C/>
-      case 'D':
+      case 'd':
         return <D/>
-      case 'E':
+      case 'e':
         return <E/>
-      case 'F':
+      case 'f':
         return <F/>
-      case 'G':
+      case 'g':
         return <G/>
-      case 'H':
+      case 'h':
         return <H/>
-      case 'I':
+      case 'i':
         return <I/>
-      case 'J':
+      case 'j':
         return <J/>
-      case 'K':
+      case 'k':
         return <K/>
-      case 'L':
+      case 'l':
         return <L/>
-      case 'M':
+      case 'm':
         return <M/>
-      case 'N':
+      case 'n':
         return <N/>
-      case 'O':
+      case 'o':
         return <O/>
-      case 'P':
+      case 'p':
         return <P/>
-      case 'Q':
+      case 'q':
         return <Q/>
-      case 'R':
+      case 'r':
         return <R/>
-      case 'S':
+      case 's':
         return <S/>
-      case 'T':
+      case 't':
         return <T/>
-      case 'U':
+      case 'u':
         return <U/>
-      case 'V':
+      case 'v':
         return <V/>
-      case 'W':
+      case 'w':
         return <W/>
-      case 'X':
+      case 'x':
         return <X/>
-      case 'Y':
+      case 'y':
         return <Y/>
-      case 'Z':
-        return <Z/>
+      case 'z':
+        return <Z/>     
       default:
         return <div />
     }
   }
 
   render() {
-    return (
-      <div className={`letter-div ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>
-        {this.renderSwitch()}
-      </div>
-    );
+    if (this.props.Sound.length === 1) {
+      return(
+        <div className={`letter-div w-1`}>
+          <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound()}</div>
+        </div>        
+      )
+    } else {      
+      if (this.props.Sound === this.props.Sound.toUpperCase()) {
+        return(
+          <div>
+            <div className='flex letter-div w-1'>
+              <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(0, 1).toLowerCase())}</div>
+              <div className={`letter-rotated -ml-12 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(1, 1).toLowerCase())}</div>
+            </div>
+          </div>
+      )} else {
+        return(      
+          <div className='flex letter-div w-1'>
+            <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(0, 1))}</div>
+            <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(1, 1))}</div>
+          </div>                
+        );
+      }
+    }
   }
 }
