@@ -21,7 +21,7 @@ const SOUNDS: string[] = [
   's', 'a', 't', 'i', 'p', 'n', 
   'ck', 'e', 'h', 'r', 'm', 'd', 
   'g', 'o', 'u', 'l', 'f', 'b', 
-  'ai', 'j', 'oa', 'v', 'oo', 'OO', 
-  'y', 'x', 'ch', 'sh', 'th', 'TH',
+  'ai', 'j', 'oa', 'v', 'oo', '_oo', 
+  'y', 'x', 'ch', 'sh', 'th', '_th',
   'qu', 'ou', 'oi', 'ue', 'er', 'ar'
 ]

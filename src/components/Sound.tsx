@@ -100,25 +100,37 @@ export default class Sound extends React.PureComponent<ILetterProps, {}> {
     }
   }
 
+  playAudio() {    
+    var audio = new Audio(`/sounds/british_english/${this.props.Sound}.mp3`);    
+    setTimeout(() => {
+      audio.play();
+      setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0;
+      }, 1000);
+    }, 1000);
+    audio.play();
+  }
+
   render() {
     if (this.props.Sound.length === 1) {
       return(
-        <div className={`letter-div w-1`}>
+        <div className={`letter-div w-1`} onClick={() => this.playAudio()} >
           <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound()}</div>
         </div>        
       )
     } else {      
-      if (this.props.Sound === this.props.Sound.toUpperCase()) {
+      if (this.props.Sound.includes('_')) {
         return(
           <div>
-            <div className='flex letter-div w-1'>
-              <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(0, 1).toLowerCase())}</div>
-              <div className={`letter-rotated -ml-12 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(1, 1).toLowerCase())}</div>
+            <div className='flex letter-div w-1' onClick={() => this.playAudio()}>
+              <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(1, 1).toLowerCase())}</div>
+              <div className={`letter-rotated -ml-12 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(2, 1).toLowerCase())}</div>
             </div>
           </div>
       )} else {
         return(      
-          <div className='flex letter-div w-1'>
+          <div className='flex letter-div w-1' onClick={() => this.playAudio()}>
             <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(0, 1))}</div>
             <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(1, 1))}</div>
           </div>                
