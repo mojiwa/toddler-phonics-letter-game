@@ -4,20 +4,22 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import About from './About';
 import Home from './Home';
 import LetterSelect from './SoundSelect';
+import { LetterAndSet } from './interfaces';
 
 interface IAppState {
-  Letters: string[];
-  Objects: string[];
+  SavedData: LetterAndSet[];
 }
+
+const EMPTY_SAVED_DATA: LetterAndSet[] = [];
+const SAVED_DATA_KEY: string = 'savedLettersAndSets';
 
 class App extends React.PureComponent<{},IAppState> {
   readonly state = {
-    Letters: this.getData('letters'),
-    Objects: this.getData('objects')
+    SavedData: EMPTY_SAVED_DATA
   }
 
-  componentDidMount = () => {
-    
+  componentDidMount = () => {    
+    this.setState({SavedData: this.getData(SAVED_DATA_KEY)});
   }
 
   /** 
@@ -33,14 +35,10 @@ class App extends React.PureComponent<{},IAppState> {
    * first stringify it (as web storage can only store strings), 
    * and then set the state to the appropriate new data. 
   */
-  storeData = (key: string, data: string[]) => {    
+  storeData = (key: string, data: LetterAndSet[]) => {    
     if (this.userCanUseStorage()) {
       var value = JSON.stringify(data);
-      localStorage.setItem(key, value);
-      if (key === 'letters')
-        this.setState({Letters: data})
-      else if (key === 'objects')
-        this.setState({Objects: data});
+      localStorage.setItem(key, value);      
     }
     else {
       return;
@@ -53,18 +51,18 @@ class App extends React.PureComponent<{},IAppState> {
    * If the user does not have access to web storage, simply return
    * an empty array (no settings have been saved)
   */
-  getData(key: string): string[] {
+  getData(key: string): LetterAndSet[] {
+    var returnData = EMPTY_SAVED_DATA;
     if (this.userCanUseStorage()) {
       var data = localStorage.getItem(key);
       if (data !== null) {
-        return JSON.parse(data);
-      } else {
-        return [''];
+        var jsonData: LetterAndSet[] = JSON.parse(data);                
+        jsonData.forEach((lap: LetterAndSet) => {
+          returnData.push(lap);
+        });
       }
     }
-    else {
-      return [''];
-    }
+    return returnData;
   }
 
   render() {

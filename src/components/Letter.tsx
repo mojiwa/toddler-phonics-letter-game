@@ -28,7 +28,7 @@ import {ReactComponent as Z} from '../images/z.svg';
 
 
 interface ILetterProps {
-  Sound: string;
+  Letter: string;
   Size: string;
 }
 
@@ -36,12 +36,12 @@ interface ILetterProps {
  * Displays the corresponding .svg for the letter passed in the props
  * along with the selected height.
 */
-export default class Sound extends React.PureComponent<ILetterProps, {}> {
+export default class Letter extends React.PureComponent<ILetterProps, {}> {
   readonly state = {
 
   }
 
-  renderSingleLetterSound(sound: string = this.props.Sound) {
+  renderSingleLetterSound(sound: string = this.props.Letter) {
     switch (sound) {
       case 'a':
         return <A/>
@@ -101,7 +101,7 @@ export default class Sound extends React.PureComponent<ILetterProps, {}> {
   }
 
   playAudio() {    
-    var audio = new Audio(`/sounds/british_english/${this.props.Sound}.mp3`);    
+    var audio = new Audio(`/sounds/british_english/${this.props.Letter}.mp3`);    
     setTimeout(() => {
       audio.play();
       setTimeout(() => {
@@ -113,26 +113,26 @@ export default class Sound extends React.PureComponent<ILetterProps, {}> {
   }
 
   render() {
-    if (this.props.Sound.length === 1) {
+    if (this.props.Letter.length === 1) {
       return(
         <div className={`letter-div w-1`} onClick={() => this.playAudio()} >
           <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound()}</div>
         </div>        
       )
     } else {      
-      if (this.props.Sound.includes('_')) {
+      if (this.props.Letter.includes('_')) {
         return(
           <div>
             <div className='flex letter-div w-1' onClick={() => this.playAudio()}>
-              <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(1, 1).toLowerCase())}</div>
-              <div className={`letter-rotated -ml-12 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(2, 1).toLowerCase())}</div>
+              <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(1, 1).toLowerCase())}</div>
+              <div className={`letter-rotated -ml-12 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(2, 1).toLowerCase())}</div>
             </div>
           </div>
       )} else {
         return(      
           <div className='flex letter-div w-1' onClick={() => this.playAudio()}>
-            <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(0, 1))}</div>
-            <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Sound.substr(1, 1))}</div>
+            <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(0, 1))}</div>
+            <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(1, 1))}</div>
           </div>                
         );
       }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Sound from './components/Sound';
+import Letter from './components/Letter';
 
 /** 
  * Displays all the letters so that the parent may select which to focus on
@@ -10,7 +10,7 @@ export default class LetterSelect extends React.PureComponent<{},{}> {
     return(
       <div className='flex-col'>
         {SOUNDS.map(l => (
-          <Sound key={l} Sound={l} Size='small' />
+          <Letter key={l} Letter={l} Size='small' />
         ))}
       </div>
     )
