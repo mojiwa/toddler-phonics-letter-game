@@ -97,7 +97,9 @@ class App extends React.PureComponent<{},IAppState> {
   }
 
   onLanguageSelect = (languageSelected: any) => {
-    this.setState({LanguageSelection: parseInt(languageSelected)});
+    let languageSelection: LanguageSelection = parseInt(languageSelected);
+    this.storeLanguageSelection(languageSelection);
+    this.setState({LanguageSelection: languageSelection});
   }
 
   render() {
