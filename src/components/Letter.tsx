@@ -25,11 +25,13 @@ import {ReactComponent as W} from '../images/w.svg';
 import {ReactComponent as X} from '../images/x.svg';
 import {ReactComponent as Y} from '../images/y.svg';
 import {ReactComponent as Z} from '../images/z.svg';
+import { ILetterData, LanguageSelection } from '../interfaces';
 
 
 interface ILetterProps {
-  Letter: string;
+  LetterData: ILetterData;
   Size: string;
+  LanguagePreference: LanguageSelection;
 }
 
 /** 
@@ -37,12 +39,10 @@ interface ILetterProps {
  * along with the selected height.
 */
 export default class Letter extends React.PureComponent<ILetterProps, {}> {
-  readonly state = {
 
-  }
-
-  renderSingleLetterSound(sound: string = this.props.Letter) {
-    switch (sound) {
+  // Render the letter based on the props
+  renderLetter(letter: string = this.props.LetterData.Letter) {
+    switch (letter) {
       case 'a':
         return <A/>
       case 'b':
@@ -100,8 +100,13 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
     }
   }
 
+  // Plays the sound of the selected letter dependent upon
+  // language preference
   playAudio() {    
-    var audio = new Audio(`/sounds/british_english/${this.props.Letter}.mp3`);    
+    var audio = new Audio(this.props.LanguagePreference === 
+      LanguageSelection.British ? 
+        this.props.LetterData.BritishAudioUrl : 
+        this.props.LetterData.AmericanAudioUrl);    
     setTimeout(() => {
       audio.play();
       setTimeout(() => {
@@ -114,28 +119,28 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
 
   render() {
     // render single letter sounds only
-    if (this.props.Letter.length === 1) {
+    if (this.props.LetterData.Letter.length === 1) {
       return(
         <div className={`letter-div`} onClick={() => this.playAudio()} >
-          <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound()}</div>
+          <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter()}</div>
         </div>        
       )
     } else {      
       // indicates a duplicate of letters, such as 'oo' and 'OO'. One is prefixed with an '_' to identify them as separate and are styled differently
-      if (this.props.Letter.includes('_')) {
+      if (this.props.LetterData.Letter.includes('_')) {
         return(
           <div>
             <div className='letter-div' onClick={() => this.playAudio()}>
-              <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(1, 1).toLowerCase())}</div>
-              <div className={`letter-rotated -ml-10 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(2, 1).toLowerCase())}</div>
+              <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1).toLowerCase())}</div>
+              <div className={`letter-rotated -ml-10 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(2, 1).toLowerCase())}</div>
             </div>
           </div>
       )} else {
         // render two letter sounds such as 'ai' or 'th'
         return(      
           <div className='letter-div' onClick={() => this.playAudio()}>
-            <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(0, 1))}</div>
-            <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(1, 1))}</div>
+            <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(0, 1))}</div>
+            <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1))}</div>
           </div>                
         );
       }

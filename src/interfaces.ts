@@ -7,7 +7,14 @@
  * @param Letter: Lowercase character of the letter selected
  * @param Set: Number of the set the letter belongs to
  */
-export interface LetterAndSet {
+export interface ILetterData {
     Letter: string;    
     Set: number;
+    BritishAudioUrl: string;
+    AmericanAudioUrl: string;
+}
+
+export enum LanguageSelection {
+    British,
+    American
 }
