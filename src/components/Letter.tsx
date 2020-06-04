@@ -116,7 +116,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
     // render single letter sounds only
     if (this.props.Letter.length === 1) {
       return(
-        <div className={`letter-div w-1`} onClick={() => this.playAudio()} >
+        <div className={`letter-div`} onClick={() => this.playAudio()} >
           <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound()}</div>
         </div>        
       )
@@ -125,15 +125,15 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       if (this.props.Letter.includes('_')) {
         return(
           <div>
-            <div className='flex letter-div w-1' onClick={() => this.playAudio()}>
+            <div className='letter-div' onClick={() => this.playAudio()}>
               <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(1, 1).toLowerCase())}</div>
-              <div className={`letter-rotated -ml-12 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(2, 1).toLowerCase())}</div>
+              <div className={`letter-rotated -ml-10 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(2, 1).toLowerCase())}</div>
             </div>
           </div>
       )} else {
         // render two letter sounds such as 'ai' or 'th'
         return(      
-          <div className='flex letter-div w-1' onClick={() => this.playAudio()}>
+          <div className='letter-div' onClick={() => this.playAudio()}>
             <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(0, 1))}</div>
             <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(1, 1))}</div>
           </div>                
