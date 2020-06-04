@@ -89,12 +89,15 @@ class App extends React.PureComponent<{},IAppState> {
     var returnData: LanguageSelection = LanguageSelection.British;
     if (this.userCanUseStorage()) {
       var data = localStorage.getItem(SAVED_LANGUAGE_KEY);
-      console.log(data);
       if (data !== null) {
         returnData = parseInt(data);
       }
     }
     return returnData;
+  }
+
+  onLanguageSelect = (languageSelected: any) => {
+    this.setState({LanguageSelection: parseInt(languageSelected)});
   }
 
   render() {
@@ -112,6 +115,11 @@ class App extends React.PureComponent<{},IAppState> {
               <Link to="/phonics-sets">Phonics Sets</Link>
             </li>
           </ul>
+          <label>Select Language:</label>
+          <select id='language' name='language' onChange={(e) => this.onLanguageSelect(e.target.value)} value={this.state.LanguageSelection}>
+            <option value={0}>British</option>
+            <option value={1}>American</option>
+          </select>
           <hr />
           <Switch>
             <Route exact path="/">
