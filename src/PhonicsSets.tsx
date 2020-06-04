@@ -17,7 +17,7 @@ export default class PhonicsSets extends React.PureComponent<ILetterSelectProps,
     return(
       <div>
         <div>
-          Click on a letter to hear its pronunciation. You can switch between British and American English in the options menu above.
+          Right-Click or long-press on a letter to hear its pronunciation. You can switch between British and American English in the options menu above.
         </div>
         <br />
         Set 1
