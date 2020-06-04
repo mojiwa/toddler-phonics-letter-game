@@ -113,6 +113,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
   }
 
   render() {
+    // render single letter sounds only
     if (this.props.Letter.length === 1) {
       return(
         <div className={`letter-div w-1`} onClick={() => this.playAudio()} >
@@ -120,6 +121,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
         </div>        
       )
     } else {      
+      // indicates a duplicate of letters, such as 'oo' and 'OO'. One is prefixed with an '_' to identify them as separate and are styled differently
       if (this.props.Letter.includes('_')) {
         return(
           <div>
@@ -129,6 +131,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
             </div>
           </div>
       )} else {
+        // render two letter sounds such as 'ai' or 'th'
         return(      
           <div className='flex letter-div w-1' onClick={() => this.playAudio()}>
             <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderSingleLetterSound(this.props.Letter.substr(0, 1))}</div>
