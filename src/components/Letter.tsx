@@ -32,11 +32,11 @@ interface ILetterProps {
   Size: string;
 }
 
-interface ILetterState {
-
-}
-
-export default class Letter extends React.PureComponent<ILetterProps, ILetterState> {
+/** 
+ * Displays the corresponding .svg for the letter passed in the props
+ * along with the selected height.
+*/
+export default class Letter extends React.PureComponent<ILetterProps, {}> {
   readonly state = {
 
   }

@@ -20,15 +20,19 @@ class App extends React.PureComponent<{},IAppState> {
     
   }
 
-  // If the user is not using HTML 5 or has disabled access to 
-  // web storage, return false.
+  /** 
+   * If the user is not using HTML 5 or has disabled access to 
+   * web storage, return false.
+  */
   userCanUseStorage(): boolean {
     return typeof(Storage) !== "undefined";
   }
 
-  // If the user has the ability to store data in web storage, 
-  // first stringify it (as web storage can only store strings), 
-  // and then set the state to the appropriate new data. 
+  /**
+   * If the user has the ability to store data in web storage, 
+   * first stringify it (as web storage can only store strings), 
+   * and then set the state to the appropriate new data. 
+  */
   storeData = (key: string, data: string[]) => {    
     if (this.userCanUseStorage()) {
       var value = JSON.stringify(data);
@@ -43,10 +47,12 @@ class App extends React.PureComponent<{},IAppState> {
     }
   }
 
-  // Extract the data from web storage using the predefined keys.
-  // The data will be stringified, so it must be parsed back into JSON.
-  // If the user does not have access to web storage, simply return
-  // an empty array (no settings have been saved)
+  /**
+   * Extract the data from web storage using the predefined keys.
+   * The data will be stringified, so it must be parsed back into JSON.
+   * If the user does not have access to web storage, simply return
+   * an empty array (no settings have been saved)
+  */
   getData(key: string): string[] {
     if (this.userCanUseStorage()) {
       var data = localStorage.getItem(key);

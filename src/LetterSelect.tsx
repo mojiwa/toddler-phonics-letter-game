@@ -1,6 +1,10 @@
 import React from 'react';
 import Letter from './components/Letter';
 
+/** 
+ * Displays all the letters so that the parent may select which to focus on
+ * in the game. Selected letters are saved to web storage. 
+*/
 export default class LetterSelect extends React.PureComponent<{},{}> {
   render() {
     return(

@@ -1,3 +1,7 @@
+/*
+* === Global overriding styles ===
+*/
+
 html {
     height: 100%;
 }
@@ -6,6 +10,10 @@ body {
     height: 100%;
     background-color: #2C5282;
 }
+
+/*
+* === Letter styling ===
+*/
 
 .letter-div-small > svg {
     height: 100px;
@@ -18,12 +26,8 @@ body {
 }
 
 .letter-div > svg:hover {
-    animation: shuffle-letter 0.6s ease-out;
+    animation: shake-letter 0.6s ease-out;
     transform-origin: center;
-}
-
-.letter-div > svg:hover > .letter-fill {
-    fill: cadetblue;    
 }
 
 .letter-fill {
@@ -36,7 +40,11 @@ body {
     stroke-linejoin: round;
 }
 
-@keyframes shuffle-letter {
+.letter-div > svg:hover > .letter-fill {
+    fill: cadetblue;    
+}
+
+@keyframes shake-letter {
     0% { transform: rotate(0deg);}
     10% { transform: rotate(5deg);}
     20% { transform: rotate(0deg);}
