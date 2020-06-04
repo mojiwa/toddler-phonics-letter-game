@@ -7,9 +7,14 @@ body {
     background-color: #2C5282;
 }
 
-.letter-div > svg {
+.letter-div-small > svg {
     height: 100px;
     width: 100px;
+}
+
+.letter-div-large > svg {
+    height: 200px;
+    width: 200px;
 }
 
 .letter-div > svg:hover {

@@ -6,7 +6,7 @@ export default class LetterSelect extends React.PureComponent<{},{}> {
     return(
       <div className='flex-col'>
         {LETTERS.map(l => (
-          <Letter key={l} Letter={l} />
+          <Letter key={l} Letter={l} Size='small' />
         ))}
       </div>
     )

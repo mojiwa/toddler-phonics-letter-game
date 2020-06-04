@@ -29,6 +29,7 @@ import {ReactComponent as Z} from '../images/z.svg';
 
 interface ILetterProps {
   Letter: string;
+  Size: string;
 }
 
 interface ILetterState {
@@ -101,7 +102,7 @@ export default class Letter extends React.PureComponent<ILetterProps, ILetterSta
 
   render() {
     return (
-      <div className='letter-div'>
+      <div className={`letter-div ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>
         {this.renderSwitch()}
       </div>
     );
