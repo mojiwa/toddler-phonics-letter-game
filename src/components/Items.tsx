@@ -22,10 +22,12 @@ export default class Items extends React.PureComponent<IItemProps, IItemState> {
   }
 
   render() {
+    let selectedLetters: string[] = [];
+    this.props.LetterData.forEach(ld => { if (ld.IsSelected)  selectedLetters.push(ld.Letter) });
     return (
       <div>
         <ul>
-          {this.props.ItemData.map(item => (
+          {this.props.ItemData.filter(item => selectedLetters.includes(item.Letter)).map(item => (
             <li>
               <img 
                 src={item.ImageUrl} alt={item.Item} 
