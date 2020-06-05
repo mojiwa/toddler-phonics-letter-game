@@ -1,8 +1,6 @@
 import React from 'react';
 import Letter from './components/Letter';
 import { ILetterData, LanguageSelection, IItemData } from './interfaces';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Items from './components/Items';
 
 interface ILetterSelectProps {
   LetterData: ILetterData[];
