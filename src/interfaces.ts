@@ -28,3 +28,8 @@ export enum LanguageSelection {
     British,
     American
 }
+
+export enum GameType {
+    Phonics,
+    Letters
+}

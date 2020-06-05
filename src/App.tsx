@@ -4,27 +4,31 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import About from './About';
 import Home from './Home';
 import PhonicsSets from './PhonicsSets';
-import { ILetterData, LanguageSelection, IItemData } from './interfaces';
+import { ILetterData, LanguageSelection, IItemData, GameType } from './interfaces';
 import Items from './components/Items';
 
 interface IAppState {
   SavedData: ILetterData[];
   LanguageSelection: LanguageSelection;
+  GameTypeSelection: GameType;
 }
 
 const EMPTY_SAVED_DATA: ILetterData[] = [];
 const SAVED_DATA_KEY: string = 'savedLettersAndSets';
 const SAVED_LANGUAGE_KEY: string = 'savedLanguageSelection';
+const SAVED_GAME_TYPE_KEY: string = 'savedGameTypeSelection';
 
 class App extends React.PureComponent<{},IAppState> {
   readonly state = {
     SavedData: EMPTY_SAVED_DATA,
-    LanguageSelection: LanguageSelection.British
+    LanguageSelection: LanguageSelection.British,
+    GameTypeSelection: GameType.Phonics
   }
 
   componentDidMount = () => {    
     this.setState({SavedData: this.getData()});
-    this.setState({LanguageSelection: this.getLanguageSelection()})
+    this.setState({LanguageSelection: this.getLanguageSelection()});
+    this.setState({GameTypeSelection: this.getGameTypeSelection()});
   }
 
   /** 
@@ -53,12 +57,23 @@ class App extends React.PureComponent<{},IAppState> {
 
   /**
    * Store the Language selection in web storage
+   * @param languageSelection Enum pertaining to the selected language (0 or 1)
+   */
+  storeLanguageSelection(languageSelection: LanguageSelection) {
+    if (this.userCanUseStorage()) {
+      var value = languageSelection.toString();
+      localStorage.setItem(SAVED_LANGUAGE_KEY, value);
+    }
+  }
+
+  /**
+   * Store the GameType selection in web storage
    * @param LanguageSelection Enum pertaining to the selected language (0 or 1)
    */
-  storeLanguageSelection(LanguageSelection: LanguageSelection) {
+  storeGameTypeSelection(gameTypeSelection: GameType) {
     if (this.userCanUseStorage()) {
-      var value = LanguageSelection.toString();
-      localStorage.setItem(SAVED_LANGUAGE_KEY, value);
+      var value = gameTypeSelection.toString();
+      localStorage.setItem(SAVED_GAME_TYPE_KEY, value);
     }
   }
 
@@ -98,10 +113,29 @@ class App extends React.PureComponent<{},IAppState> {
     return returnData;
   }
 
+  /** 
+   * Extract the game type selected option from web storage, if possible,
+   * else default to British English. 
+  */
+ getGameTypeSelection(): GameType {
+  var returnData: GameType = GameType.Phonics;
+  if (this.userCanUseStorage()) {
+    var data = localStorage.getItem(SAVED_GAME_TYPE_KEY);
+    if (data !== null) {
+      returnData = parseInt(data);
+    }
+  }
+  return returnData;
+}
+
   onLanguageSelect = (languageSelected: any) => {
     let languageSelection: LanguageSelection = parseInt(languageSelected);
     this.storeLanguageSelection(languageSelection);
     this.setState({LanguageSelection: languageSelection});
+  }
+
+  onGameTypeSelect = (gameTypeSelected: any) => {
+
   }
 
   applyChanges = (letterData: ILetterData) => {
@@ -131,6 +165,11 @@ class App extends React.PureComponent<{},IAppState> {
                 <Link to='/items'>Items</Link>
               </li>
             </ul>
+            <label className='ml-2'>Select Game Type:</label>
+            <select id='game-type' name='game-type' onChange={(e) => this.onGameTypeSelect(e.target.value)} value={this.state.GameTypeSelection}>
+              <option value={0}>Phonics</option>
+              <option value={1}>Letters</option>
+            </select>
             <label className='ml-2'>Select Language:</label>
             <select id='language' name='language' onChange={(e) => this.onLanguageSelect(e.target.value)} value={this.state.LanguageSelection}>
               <option value={0}>British</option>
@@ -149,7 +188,7 @@ class App extends React.PureComponent<{},IAppState> {
               <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} ItemData={ITEMS}/>
             </Route>
             <Route path="/items">
-              <Items ItemData={ITEMS} LanguageSelection={this.state.LanguageSelection} LetterData={this.state.SavedData} />
+              <Items ItemData={ITEMS} LanguageSelection={this.state.LanguageSelection} LetterData={this.state.SavedData} GameType={this.state.GameTypeSelection} />
           </Route>
           </Switch>
         </div>

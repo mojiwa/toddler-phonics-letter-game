@@ -1,10 +1,11 @@
 import React from 'react';
-import { ILetterData, IItemData, LanguageSelection } from '../interfaces';
+import { ILetterData, IItemData, LanguageSelection, GameType } from '../interfaces';
 
 interface IItemProps {
   LetterData: ILetterData[];
   ItemData: IItemData[];
   LanguageSelection: LanguageSelection;
+  GameType: GameType;
 }
 
 interface IItemState { 
@@ -30,7 +31,7 @@ export default class Items extends React.PureComponent<IItemProps, IItemState> {
     return (
       <div>
         <ul>
-          {this.props.ItemData.filter(item => selectedLetters.includes(item.Letter)).map(item => (
+          {this.props.ItemData.filter(item => selectedLetters.includes(this.props.GameType === GameType.Letters ? item.Letter : item.Sound)).map(item => (
             <li>
               <img 
                 src={item.ImageUrl} alt={item.Item} 
