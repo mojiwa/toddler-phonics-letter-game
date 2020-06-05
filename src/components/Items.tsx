@@ -11,6 +11,9 @@ interface IItemState {
 
 }
 
+/**
+ * Displays the list of items corresponding to the phonics/letters the user has selected
+*/
 export default class Items extends React.PureComponent<IItemProps, IItemState> {
   readonly state = {
 
