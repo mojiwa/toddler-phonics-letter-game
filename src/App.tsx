@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import About from './About';
 import Home from './Home';
 import PhonicsSets from './PhonicsSets';
-import { ILetterData, LanguageSelection } from './interfaces';
+import { ILetterData, LanguageSelection, IItemData } from './interfaces';
+import Items from './components/Items';
 
 interface IAppState {
   SavedData: ILetterData[];
@@ -126,6 +127,9 @@ class App extends React.PureComponent<{},IAppState> {
               <li className='p-2'>
                 <Link to="/phonics-sets">Phonics Sets</Link>
               </li>
+              <li className='p-2'>
+                <Link to='/items'>Items</Link>
+              </li>
             </ul>
             <label className='ml-2'>Select Language:</label>
             <select id='language' name='language' onChange={(e) => this.onLanguageSelect(e.target.value)} value={this.state.LanguageSelection}>
@@ -142,8 +146,11 @@ class App extends React.PureComponent<{},IAppState> {
               <About />
             </Route>
             <Route path="/phonics-sets">
-              <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges}/>
+              <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} ItemData={ITEMS}/>
             </Route>
+            <Route path="/items">
+              <Items ItemData={ITEMS} LanguageSelection={this.state.LanguageSelection} LetterData={this.state.SavedData} />
+          </Route>
           </Switch>
         </div>
       </Router>
@@ -154,7 +161,7 @@ class App extends React.PureComponent<{},IAppState> {
 export default App;
 
 // List of letter sounds in their phonics sets
-var PHONICS_AND_SETS: ILetterData[] = [
+const PHONICS_AND_SETS: ILetterData[] = [
   { Letter: 's', Set: 1, BritishAudioUrl: '/sounds/british/s.mp3', AmericanAudioUrl: '/sounds/american/s.mp3', IsSelected: false }, 
   { Letter: 'a', Set: 1, BritishAudioUrl: '/sounds/british/a.mp3', AmericanAudioUrl: '/sounds/american/a.mp3', IsSelected: false }, 
   { Letter: 't', Set: 1, BritishAudioUrl: '/sounds/british/t.mp3', AmericanAudioUrl: '/sounds/american/t.mp3', IsSelected: false }, 
@@ -200,8 +207,7 @@ var PHONICS_AND_SETS: ILetterData[] = [
 ]
 
 // Standard list of the alphabet
-var LETTERS_AND_SETS: ILetterData[] = [
-  
+const LETTERS_AND_SETS: ILetterData[] = [
   { Letter: 'a', Set: 1, BritishAudioUrl: '/sounds/british/a.mp3', AmericanAudioUrl: '/sounds/american/a.mp3', IsSelected: false },
   { Letter: 'b', Set: 3, BritishAudioUrl: '/sounds/british/b.mp3', AmericanAudioUrl: '/sounds/american/b.mp3', IsSelected: false }, 
   { Letter: 'c', Set: 2, BritishAudioUrl: '/sounds/british/ck.mp3', AmericanAudioUrl: '/sounds/american/ck.mp3', IsSelected: false }, 
@@ -229,4 +235,27 @@ var LETTERS_AND_SETS: ILetterData[] = [
   { Letter: 'y', Set: 6, BritishAudioUrl: '/sounds/british/y.mp3', AmericanAudioUrl: '/sounds/american/y.mp3', IsSelected: false }, 
   { Letter: 'z', Set: 5, BritishAudioUrl: '/sounds/british/z.mp3', AmericanAudioUrl: '/sounds/american/z.mp3', IsSelected: false }, 
   
+]
+
+const ITEMS: IItemData[] = [ 
+  { Item: 'alligator', Letter: 'a', Sound: 'a', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/alligator--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/alligator--_us_1.mp3', ImageUrl: './images/objects/set1/a/alligator.jpg' },
+  { Item: 'ant', Letter: 'a', Sound: 'a', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/ant--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/ant--_us_1.mp3', ImageUrl: './images/objects/set1/a/ant.jpg' },
+  { Item: 'apple', Letter: 'a', Sound: 'a', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/apple--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/apple--_us_1.mp3', ImageUrl: './images/objects/set1/a/apple.jpg' },
+  { Item: 'iguana', Letter: 'i', Sound: 'i', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/iguana--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/iguana--_us_1.mp3', ImageUrl: './images/objects/set1/i/iguana.jpg' },
+  { Item: 'nail', Letter: 'n', Sound: 'n', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/nail--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/nail--_us_1.mp3', ImageUrl: './images/objects/set1/n/nail.jpg' },
+  { Item: 'nest', Letter: 'n', Sound: 'n', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/nest--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/nest--_us_1.mp3', ImageUrl: './images/objects/set1/n/nest.jpg' },
+  { Item: 'panda', Letter: 'p', Sound: 'p', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/panda--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/panda--_us_1.mp3', ImageUrl: './images/objects/set1/p/panda.jpg' },
+  { Item: 'parrot', Letter: 'p', Sound: 'p', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/parrot--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/parrot--_us_1.mp3', ImageUrl: './images/objects/set1/p/parrot.jpg' },
+  { Item: 'penguin', Letter: 'p', Sound: 'p', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/penguin--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/penguin--_us_1.mp3', ImageUrl: './images/objects/set1/p/penguin.jpg' },
+  { Item: 'pig', Letter: 'p', Sound: 'p', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/pig--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/pig--_us_1.mp3', ImageUrl: './images/objects/set1/p/pig.jpg' },
+  { Item: 'sandcastle', Letter: 's', Sound: 's', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/sandcastle--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/sandcastle--_us_1.mp3', ImageUrl: './images/objects/set1/s/sandcastle.jpg' },
+  { Item: 'snake', Letter: 's', Sound: 's', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/snake--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/snake--_us_1.mp3', ImageUrl: './images/objects/set1/s/snake.jpg' },
+  { Item: 'snowman', Letter: 's', Sound: 's', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/snowman--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/snowman--_us_1.mp3', ImageUrl: './images/objects/set1/s/snowman.jpg' },
+  { Item: 'spoon', Letter: 's', Sound: 's', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/spoon--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/spoon--_us_1.mp3', ImageUrl: './images/objects/set1/s/spoon.jpg' },
+  { Item: 'star', Letter: 's', Sound: 's', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/star--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/star--_us_1.mp3', ImageUrl: './images/objects/set1/s/star.jpg' },
+  { Item: 'teapot', Letter: 't', Sound: 't', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/teapot--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/teapot--_us_1.mp3', ImageUrl: './images/objects/set1/t/teapot.jpg' },
+  { Item: 'teddy', Letter: 't', Sound: 't', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/teddy--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/teddy--_us_1.mp3', ImageUrl: './images/objects/set1/t/teddy.jpg' },
+  { Item: 'tomato', Letter: 't', Sound: 't', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/tomato--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/tomato--_us_1.mp3', ImageUrl: './images/objects/set1/t/tomato.jpg' },
+  { Item: 'turtle', Letter: 't', Sound: 't', BritishAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/turtle--_gb_1.mp3', AmericanAudioUrl: 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/turtle--_us_1.mp3', ImageUrl: './images/objects/set1/t/turtle.jpg' },
+
 ]

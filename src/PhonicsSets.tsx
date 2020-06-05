@@ -1,11 +1,14 @@
 import React from 'react';
 import Letter from './components/Letter';
-import { ILetterData, LanguageSelection } from './interfaces';
+import { ILetterData, LanguageSelection, IItemData } from './interfaces';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Items from './components/Items';
 
 interface ILetterSelectProps {
   LetterData: ILetterData[];
   LanguageSelection: LanguageSelection;
   ApplyChanges: Function;
+  ItemData: IItemData[];
 }
 
 /** 
@@ -77,6 +80,8 @@ export default class PhonicsSets extends React.PureComponent<ILetterSelectProps,
             </li>
           ))}
         </ul>      
+        
+        
       </div>
     )
   }

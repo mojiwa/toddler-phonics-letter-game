@@ -15,6 +15,15 @@ export interface ILetterData {
     IsSelected: boolean;
 }
 
+export interface IItemData {
+    Item: string;
+    Letter: string;
+    Sound: string;
+    BritishAudioUrl: string;
+    AmericanAudioUrl: string;
+    ImageUrl: string;
+}
+
 export enum LanguageSelection {
     British,
     American
