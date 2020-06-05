@@ -12,6 +12,7 @@ export interface ILetterData {
     Set: number;
     BritishAudioUrl: string;
     AmericanAudioUrl: string;
+    IsSelected: boolean;
 }
 
 export enum LanguageSelection {

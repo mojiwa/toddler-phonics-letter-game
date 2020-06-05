@@ -34,6 +34,7 @@ interface ILetterProps {
   Size: string;
   LanguagePreference: LanguageSelection;
   PlayAudio: boolean;
+  ApplyChanges: Function;
 }
 
 interface ILetterState {
@@ -47,7 +48,7 @@ interface ILetterState {
 */
 export default class Letter extends React.PureComponent<ILetterProps, {}> {
   readonly state = {
-    Selected: false,
+    Selected: this.props.LetterData.IsSelected,
     AudioPlayed: false
   }
 
@@ -133,7 +134,16 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
   }
 
   onSelected = () => {
-    this.setState({Selected: !this.state.Selected});
+    this.setState({Selected: !this.state.Selected}, () => {
+      let letterToSave: ILetterData = {
+        Letter: this.props.LetterData.Letter,
+        Set: this.props.LetterData.Set,
+        BritishAudioUrl: this.props.LetterData.BritishAudioUrl,
+        AmericanAudioUrl: this.props.LetterData.AmericanAudioUrl,
+        IsSelected: this.state.Selected
+      }
+      this.props.ApplyChanges(letterToSave);
+    });
     return false;
   }
 
@@ -143,7 +153,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       if (timer === undefined) timer = setTimeout(() => { 
         this.playAudio(); 
         this.setState({AudioPlayed: true}); 
-      }, 1000);
+      }, 500);
   }
   
   // On mouse up, we check to see if the timer was hit and
