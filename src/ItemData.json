@@ -1,0 +1,154 @@
+[
+  {
+    "Item": "alligator",
+    "Letter": "a",
+    "Sound": "a",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/alligator--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/alligator--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/a/alligator.jpg"
+  },
+  {
+    "Item": "ant",
+    "Letter": "a",
+    "Sound": "a",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/ant--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/ant--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/a/ant.jpg"
+  },
+  {
+    "Item": "apple",
+    "Letter": "a",
+    "Sound": "a",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/apple--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/apple--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/a/apple.jpg"
+  },
+  {
+    "Item": "iguana",
+    "Letter": "i",
+    "Sound": "i",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/iguana--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/iguana--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/i/iguana.jpg"
+  },
+  {
+    "Item": "nail",
+    "Letter": "n",
+    "Sound": "n",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/nail--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/nail--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/n/nail.jpg"
+  },
+  {
+    "Item": "nest",
+    "Letter": "n",
+    "Sound": "n",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/nest--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/nest--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/n/nest.jpg"
+  },
+  {
+    "Item": "panda",
+    "Letter": "p",
+    "Sound": "p",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/panda--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/panda--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/p/panda.jpg"
+  },
+  {
+    "Item": "parrot",
+    "Letter": "p",
+    "Sound": "p",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/parrot--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/parrot--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/p/parrot.jpg"
+  },
+  {
+    "Item": "penguin",
+    "Letter": "p",
+    "Sound": "p",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/penguin--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/penguin--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/p/penguin.jpg"
+  },
+  {
+    "Item": "pig",
+    "Letter": "p",
+    "Sound": "p",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/pig--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/pig--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/p/pig.jpg"
+  },
+  {
+    "Item": "sandcastle",
+    "Letter": "s",
+    "Sound": "s",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/sandcastle--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/sandcastle--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/s/sandcastle.jpg"
+  },
+  {
+    "Item": "snake",
+    "Letter": "s",
+    "Sound": "s",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/snake--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/snake--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/s/snake.jpg"
+  },
+  {
+    "Item": "snowman",
+    "Letter": "s",
+    "Sound": "s",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/snowman--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/snowman--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/s/snowman.jpg"
+  },
+  {
+    "Item": "spoon",
+    "Letter": "s",
+    "Sound": "s",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/spoon--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/spoon--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/s/spoon.jpg"
+  },
+  {
+    "Item": "star",
+    "Letter": "s",
+    "Sound": "s",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/star--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/star--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/s/star.jpg"
+  },
+  {
+    "Item": "teapot",
+    "Letter": "t",
+    "Sound": "t",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/teapot--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/teapot--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/t/teapot.jpg"
+  },
+  {
+    "Item": "teddy",
+    "Letter": "t",
+    "Sound": "t",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/teddy--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/teddy--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/t/teddy.jpg"
+  },
+  {
+    "Item": "tomato",
+    "Letter": "t",
+    "Sound": "t",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/tomato--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/tomato--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/t/tomato.jpg"
+  },
+  {
+    "Item": "turtle",
+    "Letter": "t",
+    "Sound": "t",
+    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/turtle--_gb_1.mp3",
+    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/turtle--_us_1.mp3",
+    "ImageUrl": "./images/objects/set1/t/turtle.jpg"
+  }
+]

@@ -1,0 +1,184 @@
+[
+  {
+    "Letter": "a",
+    "Set": 1,
+    "BritishAudioUrl": "/sounds/british/a.mp3",
+    "AmericanAudioUrl": "/sounds/american/a.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "b",
+    "Set": 3,
+    "BritishAudioUrl": "/sounds/british/b.mp3",
+    "AmericanAudioUrl": "/sounds/american/b.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "c",
+    "Set": 2,
+    "BritishAudioUrl": "/sounds/british/ck.mp3",
+    "AmericanAudioUrl": "/sounds/american/ck.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "d",
+    "Set": 2,
+    "BritishAudioUrl": "/sounds/british/d.mp3",
+    "AmericanAudioUrl": "/sounds/american/d.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "e",
+    "Set": 2,
+    "BritishAudioUrl": "/sounds/british/e.mp3",
+    "AmericanAudioUrl": "/sounds/american/e.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "f",
+    "Set": 3,
+    "BritishAudioUrl": "/sounds/british/f.mp3",
+    "AmericanAudioUrl": "/sounds/american/f.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "g",
+    "Set": 3,
+    "BritishAudioUrl": "/sounds/british/g.mp3",
+    "AmericanAudioUrl": "/sounds/american/g.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "h",
+    "Set": 2,
+    "BritishAudioUrl": "/sounds/british/h.mp3",
+    "AmericanAudioUrl": "/sounds/american/h.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "i",
+    "Set": 1,
+    "BritishAudioUrl": "/sounds/british/i.mp3",
+    "AmericanAudioUrl": "/sounds/american/i.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "j",
+    "Set": 4,
+    "BritishAudioUrl": "/sounds/british/j.mp3",
+    "AmericanAudioUrl": "/sounds/american/j.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "k",
+    "Set": 2,
+    "BritishAudioUrl": "/sounds/british/ck.mp3",
+    "AmericanAudioUrl": "/sounds/american/ck.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "l",
+    "Set": 3,
+    "BritishAudioUrl": "/sounds/british/l.mp3",
+    "AmericanAudioUrl": "/sounds/american/l.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "m",
+    "Set": 2,
+    "BritishAudioUrl": "/sounds/british/m.mp3",
+    "AmericanAudioUrl": "/sounds/american/m.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "n",
+    "Set": 1,
+    "BritishAudioUrl": "/sounds/british/n.mp3",
+    "AmericanAudioUrl": "/sounds/american/n.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "o",
+    "Set": 3,
+    "BritishAudioUrl": "/sounds/british/o.mp3",
+    "AmericanAudioUrl": "/sounds/american/o.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "p",
+    "Set": 1,
+    "BritishAudioUrl": "/sounds/british/p.mp3",
+    "AmericanAudioUrl": "/sounds/american/p.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "q",
+    "Set": 7,
+    "BritishAudioUrl": "/sounds/british/qu.mp3",
+    "AmericanAudioUrl": "/sounds/american/qu.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "r",
+    "Set": 2,
+    "BritishAudioUrl": "/sounds/british/r.mp3",
+    "AmericanAudioUrl": "/sounds/american/r.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "s",
+    "Set": 1,
+    "BritishAudioUrl": "/sounds/british/s.mp3",
+    "AmericanAudioUrl": "/sounds/american/s.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "t",
+    "Set": 1,
+    "BritishAudioUrl": "/sounds/british/t.mp3",
+    "AmericanAudioUrl": "/sounds/american/t.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "u",
+    "Set": 3,
+    "BritishAudioUrl": "/sounds/british/u.mp3",
+    "AmericanAudioUrl": "/sounds/american/u.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "v",
+    "Set": 5,
+    "BritishAudioUrl": "/sounds/british/v.mp3",
+    "AmericanAudioUrl": "/sounds/american/v.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "w",
+    "Set": 5,
+    "BritishAudioUrl": "/sounds/british/w.mp3",
+    "AmericanAudioUrl": "/sounds/american/w.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "x",
+    "Set": 6,
+    "BritishAudioUrl": "/sounds/british/x.mp3",
+    "AmericanAudioUrl": "/sounds/american/x.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "y",
+    "Set": 6,
+    "BritishAudioUrl": "/sounds/british/y.mp3",
+    "AmericanAudioUrl": "/sounds/american/y.mp3",
+    "IsSelected": false
+  },
+  {
+    "Letter": "z",
+    "Set": 5,
+    "BritishAudioUrl": "/sounds/british/z.mp3",
+    "AmericanAudioUrl": "/sounds/american/z.mp3",
+    "IsSelected": false
+  }
+]
