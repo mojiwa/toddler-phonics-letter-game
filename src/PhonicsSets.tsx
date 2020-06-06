@@ -1,12 +1,11 @@
 import React from 'react';
 import Letter from './components/Letter';
-import { ILetterData, LanguageSelection, IItemData } from './interfaces';
+import { ILetterData, LanguageSelection } from './interfaces';
 
 interface ILetterSelectProps {
   LetterData: ILetterData[];
   LanguageSelection: LanguageSelection;
   ApplyChanges: Function;
-  ItemData: IItemData[];
 }
 
 /** 

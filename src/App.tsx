@@ -16,6 +16,7 @@ interface IAppState {
   LanguageSelection: LanguageSelection;
   GameTypeSelection: GameType;
   ItemData: IItemData[];
+  SelectedItems: IItemData[];
 }
 
 const EMPTY_SAVED_DATA: ILetterData[] = [];
@@ -28,11 +29,12 @@ class App extends React.PureComponent<{},IAppState> {
     SavedData: EMPTY_SAVED_DATA,
     LanguageSelection: LanguageSelection.British,
     GameTypeSelection: GameType.Phonics,
-    ItemData: JSON.parse(JSON.stringify(ItemData))
+    ItemData: JSON.parse(JSON.stringify(ItemData)) as IItemData[],
+    SelectedItems: JSON.parse(JSON.stringify(ItemData))
   }
 
   componentDidMount = () => {    
-    this.setState({SavedData: this.getData()});
+    this.setState({SavedData: this.getData()}, () => this.setSelectedItems(this.state.SavedData));
     this.setState({LanguageSelection: this.getLanguageSelection()});
     this.setState({GameTypeSelection: this.getGameTypeSelection()});
   }
@@ -150,6 +152,48 @@ class App extends React.PureComponent<{},IAppState> {
     letterSetToSave.splice(indexToSplice, 1, letterData);
     this.storeData(letterSetToSave);
     this.setState({SavedData: letterSetToSave});
+    this.setSelectedItems(letterSetToSave);
+  }
+
+  // Filter out only the items from the selected
+  // letters/sounds and save them to state
+  setSelectedItems = (savedLetters: ILetterData[]) => {
+    let selectedLetters: string[] = [];
+    savedLetters.forEach(ld => { 
+      if (ld.IsSelected) { 
+        selectedLetters.push(ld.Letter) 
+      } 
+    });
+    
+    var itemData = this.state.ItemData.filter(
+      item => selectedLetters.includes(
+        this.state.GameTypeSelection === GameType.Letters ? 
+          item.Letter : 
+          item.Sound)
+    );
+
+    this.setState({ SelectedItems: this.randomizeArray(itemData) });
+  }
+
+  // Use the Fisher-Yates shuffle to 
+  // randomize the ItemData list
+  randomizeArray(array: any[]): any[] {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
   }
 
   render() {
@@ -168,7 +212,8 @@ class App extends React.PureComponent<{},IAppState> {
                 <Link to="/phonics-sets">Phonics Sets</Link>
               </li>
               <li className='p-2'>
-                <Link to='/items'>Items</Link>
+                {/* Don't show link to the game if no letters are selected */}
+                {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/items'>Items</Link>}
               </li>
             </ul>
             <label className='ml-2'>Select Game Type:</label>
@@ -191,10 +236,10 @@ class App extends React.PureComponent<{},IAppState> {
               <About />
             </Route>
             <Route path="/phonics-sets">
-              <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} ItemData={this.state.ItemData}/>
+              <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} />
             </Route>
             <Route path="/items">
-              <Items ItemData={this.state.ItemData} LanguageSelection={this.state.LanguageSelection} LetterData={this.state.SavedData} GameType={this.state.GameTypeSelection} />
+              <Items ItemData={this.state.SelectedItems} LanguageSelection={this.state.LanguageSelection} LetterData={this.state.SavedData} GameType={this.state.GameTypeSelection} />
           </Route>
           </Switch>
         </div>
