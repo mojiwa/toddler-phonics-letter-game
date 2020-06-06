@@ -32,14 +32,6 @@
     "ImageUrl": "./images/objects/set1/i/iguana.jpg"
   },
   {
-    "Item": "nail",
-    "Letter": "n",
-    "Sound": "n",
-    "BritishAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/nail--_gb_1.mp3",
-    "AmericanAudioUrl": "https://ssl.gstatic.com/dictionary/static/sounds/oxford/nail--_us_1.mp3",
-    "ImageUrl": "./images/objects/set1/n/nail.jpg"
-  },
-  {
     "Item": "nest",
     "Letter": "n",
     "Sound": "n",

@@ -22,6 +22,29 @@ export default class Items extends React.PureComponent<IItemProps, IItemState> {
     SelectedItems: EMPTY_ITEM_DATA
   }
 
+  // Use the Fisher-Yates shuffle to 
+  // randomize the ItemData list
+  randomizeArray(array: IItemData[]): IItemData[] {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
+
+  // Filter out only the items from the selected
+  // letters/sounds and save them to state
   componentDidMount = () => {
     let selectedLetters: string[] = [];
     this.props.LetterData.forEach(ld => { 
@@ -37,7 +60,7 @@ export default class Items extends React.PureComponent<IItemProps, IItemState> {
           item.Sound)
     );
 
-    this.setState({ SelectedItems: itemData });
+    this.setState({ SelectedItems: this.randomizeArray(itemData) });
     
   }
 
