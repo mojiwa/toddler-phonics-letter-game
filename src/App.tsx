@@ -136,7 +136,9 @@ class App extends React.PureComponent<{},IAppState> {
   }
 
   onGameTypeSelect = (gameTypeSelected: any) => {
-
+    let gameTypeSelection: GameType = parseInt(gameTypeSelected);
+    this.storeGameTypeSelection(gameTypeSelection);
+    this.setState({GameTypeSelection: gameTypeSelection});
   }
 
   applyChanges = (letterData: ILetterData) => {
