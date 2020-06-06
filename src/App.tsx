@@ -20,7 +20,6 @@ interface IAppState {
 }
 
 const SAVED_DATA_KEY: string = 'savedLettersAndSets';
-const SAVED_ITEM_DATA_KEY: string = 'savedItems';
 const SAVED_LANGUAGE_KEY: string = 'savedLanguageSelection';
 const SAVED_GAME_TYPE_KEY: string = 'savedGameTypeSelection';
 
