@@ -1,14 +1,14 @@
 import React from 'react';
 import { ILetterData, IItemData, LanguageSelection, GameType } from '../interfaces';
 
-interface IItemProps {
+interface IGameProps {
   LetterData: ILetterData[];
   ItemData: IItemData[];
   LanguageSelection: LanguageSelection;
   GameType: GameType;
 }
 
-interface IItemState { 
+interface IGameState { 
   SelectedItems: IItemData[];
 }
 
@@ -17,7 +17,7 @@ const EMPTY_ITEM_DATA: IItemData[] = [];
 /**
  * Displays the list of items corresponding to the phonics/letters the user has selected
 */
-export default class Items extends React.PureComponent<IItemProps, IItemState> {
+export default class Game extends React.PureComponent<IGameProps, IGameState> {
   readonly state = {
     SelectedItems: EMPTY_ITEM_DATA
   }

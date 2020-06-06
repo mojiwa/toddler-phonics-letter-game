@@ -5,7 +5,7 @@ import About from './About';
 import Home from './Home';
 import PhonicsSets from './PhonicsSets';
 import { ILetterData, LanguageSelection, IItemData, GameType } from './interfaces';
-import Items from './components/Items';
+import Game from './components/Game';
 
 //import LetterData from './LetterData.json';
 import PhonicsData from './PhonicsData.json';
@@ -213,7 +213,7 @@ class App extends React.PureComponent<{},IAppState> {
               </li>
               <li className='p-2'>
                 {/* Don't show link to the game if no letters are selected */}
-                {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/items'>Items</Link>}
+                {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/game'>Play Game</Link>}
               </li>
             </ul>
             <label className='ml-2'>Select Game Type:</label>
@@ -238,8 +238,8 @@ class App extends React.PureComponent<{},IAppState> {
             <Route path="/phonics-sets">
               <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} />
             </Route>
-            <Route path="/items">
-              <Items ItemData={this.state.SelectedItems} LanguageSelection={this.state.LanguageSelection} LetterData={this.state.SavedData} GameType={this.state.GameTypeSelection} />
+            <Route path="/game">
+              <Game ItemData={this.state.SelectedItems} LanguageSelection={this.state.LanguageSelection} LetterData={this.state.SavedData} GameType={this.state.GameTypeSelection} />
           </Route>
           </Switch>
         </div>

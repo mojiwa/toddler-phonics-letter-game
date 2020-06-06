@@ -2,7 +2,7 @@ import React from 'react';
 import Letter from './components/Letter';
 import { ILetterData, LanguageSelection } from './interfaces';
 
-interface ILetterSelectProps {
+interface IPhonicsSetsProps {
   LetterData: ILetterData[];
   LanguageSelection: LanguageSelection;
   ApplyChanges: Function;
@@ -12,7 +12,7 @@ interface ILetterSelectProps {
  * Displays all the letters so that the parent may select which to focus on
  * in the game. Selected letters are saved to web storage. 
 */
-export default class PhonicsSets extends React.PureComponent<ILetterSelectProps,{}> {  
+export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{}> {  
 
   render() {
     return(

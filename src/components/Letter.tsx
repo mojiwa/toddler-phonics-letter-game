@@ -37,11 +37,6 @@ interface ILetterProps {
   ApplyChanges: Function;
 }
 
-interface ILetterState {
-  Selected: boolean;
-  AudioPlayed: boolean;
-}
-
 /** 
  * Displays the corresponding .svg for the letter passed in the props
  * along with the selected height.
