@@ -19,24 +19,18 @@ interface IAppState {
   SelectedItems: IItemData[];
 }
 
-const EMPTY_SAVED_DATA: ILetterData[] = [];
 const SAVED_DATA_KEY: string = 'savedLettersAndSets';
+const SAVED_ITEM_DATA_KEY: string = 'savedItems';
 const SAVED_LANGUAGE_KEY: string = 'savedLanguageSelection';
 const SAVED_GAME_TYPE_KEY: string = 'savedGameTypeSelection';
 
 class App extends React.PureComponent<{},IAppState> {
   readonly state = {
-    SavedData: EMPTY_SAVED_DATA,
-    LanguageSelection: LanguageSelection.British,
-    GameTypeSelection: GameType.Phonics,
+    SavedData: this.getData(),
+    LanguageSelection: this.getLanguageSelection(),
+    GameTypeSelection: this.getGameTypeSelection(),
     ItemData: JSON.parse(JSON.stringify(ItemData)) as IItemData[],
-    SelectedItems: JSON.parse(JSON.stringify(ItemData))
-  }
-
-  componentDidMount = () => {    
-    this.setState({SavedData: this.getData()}, () => this.setSelectedItems(this.state.SavedData));
-    this.setState({LanguageSelection: this.getLanguageSelection()});
-    this.setState({GameTypeSelection: this.getGameTypeSelection()});
+    SelectedItems: this.setSelectedItems(this.getData())
   }
 
   /** 
@@ -125,16 +119,16 @@ class App extends React.PureComponent<{},IAppState> {
    * Extract the game type selected option from web storage, if possible,
    * else default to British English. 
   */
- getGameTypeSelection(): GameType {
-  var returnData: GameType = GameType.Phonics;
-  if (this.userCanUseStorage()) {
-    var data = localStorage.getItem(SAVED_GAME_TYPE_KEY);
-    if (data !== null) {
-      returnData = parseInt(data);
+  getGameTypeSelection(): GameType {
+    var returnData: GameType = GameType.Phonics;
+    if (this.userCanUseStorage()) {
+      var data = localStorage.getItem(SAVED_GAME_TYPE_KEY);
+      if (data !== null) {
+        returnData = parseInt(data);
+      }
     }
+    return returnData;
   }
-  return returnData;
-}
 
   onLanguageSelect = (languageSelected: any) => {
     let languageSelection: LanguageSelection = parseInt(languageSelected);
@@ -151,28 +145,29 @@ class App extends React.PureComponent<{},IAppState> {
     var indexToSplice = letterSetToSave.findIndex(l => l.Letter === letterData.Letter);
     letterSetToSave.splice(indexToSplice, 1, letterData);
     this.storeData(letterSetToSave);
-    this.setState({SavedData: letterSetToSave});
-    this.setSelectedItems(letterSetToSave);
+    this.setState({SavedData: letterSetToSave}, () => {
+      let selectedItems = this.setSelectedItems(letterSetToSave);
+      this.setState({SelectedItems: selectedItems});
+    });
   }
 
   // Filter out only the items from the selected
   // letters/sounds and save them to state
-  setSelectedItems = (savedLetters: ILetterData[]) => {
+  setSelectedItems(savedLetters: ILetterData[]): IItemData[] {
     let selectedLetters: string[] = [];
     savedLetters.forEach(ld => { 
       if (ld.IsSelected) { 
         selectedLetters.push(ld.Letter) 
       } 
     });
-    
-    var itemData = this.state.ItemData.filter(
+
+    var itemData = ItemData.filter(
       item => selectedLetters.includes(
-        this.state.GameTypeSelection === GameType.Letters ? 
+        this.getGameTypeSelection() === GameType.Letters ? 
           item.Letter : 
           item.Sound)
     );
-
-    this.setState({ SelectedItems: this.randomizeArray(itemData) });
+    return itemData;
   }
 
   // Use the Fisher-Yates shuffle to 
@@ -239,7 +234,12 @@ class App extends React.PureComponent<{},IAppState> {
               <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} />
             </Route>
             <Route path="/game">
-              <Game ItemData={this.state.SelectedItems} LanguageSelection={this.state.LanguageSelection} LetterData={this.state.SavedData} GameType={this.state.GameTypeSelection} />
+              <Game 
+                ItemData={this.state.SelectedItems} 
+                LanguageSelection={this.state.LanguageSelection} 
+                LetterData={this.state.SavedData} 
+                GameType={this.state.GameTypeSelection}
+                RandomizeArray={this.randomizeArray} />
           </Route>
           </Switch>
         </div>

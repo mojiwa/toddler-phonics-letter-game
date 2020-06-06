@@ -77,8 +77,6 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
             </li>
           ))}
         </ul>      
-        
-        
       </div>
     )
   }

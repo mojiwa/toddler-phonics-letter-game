@@ -6,20 +6,19 @@ interface IGameProps {
   ItemData: IItemData[];
   LanguageSelection: LanguageSelection;
   GameType: GameType;
+  RandomizeArray: Function;
 }
 
 interface IGameState { 
   SelectedItems: IItemData[];
 }
 
-const EMPTY_ITEM_DATA: IItemData[] = [];
-
 /**
  * Displays the list of items corresponding to the phonics/letters the user has selected
 */
 export default class Game extends React.PureComponent<IGameProps, IGameState> {
   readonly state = {
-    SelectedItems: EMPTY_ITEM_DATA
+    SelectedItems: this.props.ItemData
   }
 
   playSound(audioUrl: string) {
@@ -27,13 +26,33 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     audio.play();
   }
 
+  onNext = () => {
+    // if we reach the end of the selection, randomize the list again with the selected options
+    if (this.state.SelectedItems.length === 1) {
+      this.setState({ SelectedItems: this.props.RandomizeArray(this.props.ItemData)});
+    } else {
+      // Remove the first item in the list so it displays the next image
+      var selectedItemsLessFirst = this.state.SelectedItems.filter(item => item !== this.state.SelectedItems[0]);
+      this.setState({ SelectedItems: selectedItemsLessFirst });
+    }
+  } 
+
   render() {
-    return (
-      <div>
-        <img 
-          src={this.props.ItemData[0].ImageUrl} alt={this.props.ItemData[0].Item} 
-          onClick={() => this.playSound(this.props.LanguageSelection === LanguageSelection.British ? this.props.ItemData[0].BritishAudioUrl : this.props.ItemData[0].AmericanAudioUrl)}/>
-      </div>
-    )
+    if (this.state.SelectedItems.length === 0) {
+      return (<div> </div>) 
+    } else {
+      return (
+        <div>
+          <div>
+            <img 
+              src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
+              onClick={() => this.playSound(this.props.LanguageSelection === LanguageSelection.British ? this.state.SelectedItems[0].BritishAudioUrl : this.state.SelectedItems[0].AmericanAudioUrl)}/>
+          </div>
+          <div> 
+            <button onClick={() => this.onNext()}>Next</button>
+          </div>
+        </div>
+      )
+    }
   }
 }
