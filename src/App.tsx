@@ -7,7 +7,7 @@ import PhonicsSets from './PhonicsSets';
 import { ILetterData, LanguageSelection, IItemData, GameType } from './interfaces';
 import Game from './components/Game';
 
-//import LetterData from './LetterData.json';
+import AlphabetData from './AlphabetData.json';
 import PhonicsData from './PhonicsData.json';
 import ItemData from './ItemData.json';
 
@@ -237,6 +237,7 @@ class App extends React.PureComponent<{},IAppState> {
             <Route path="/game">
               <Game 
                 ItemData={this.state.SelectedItems} 
+                Alphabet={AlphabetData}
                 LanguageSelection={this.state.LanguageSelection} 
                 LetterData={this.state.SavedData} 
                 GameType={this.state.GameTypeSelection}

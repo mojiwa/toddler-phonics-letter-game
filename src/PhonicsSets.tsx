@@ -25,7 +25,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
         <ul>
           {this.props.LetterData.filter(l => l.Set === 1).map(l => (
             <li key={l.Letter}>
-              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges}/>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
         </ul>       
@@ -33,7 +33,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
         <ul>
           {this.props.LetterData.filter(l => l.Set === 2).map(l => (
             <li key={l.Letter}>
-              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges}/>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
         </ul>
@@ -41,7 +41,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
         <ul>
           {this.props.LetterData.filter(l => l.Set === 3).map(l => (
             <li key={l.Letter}>
-              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges}/>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
         </ul>
@@ -49,7 +49,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
         <ul>
           {this.props.LetterData.filter(l => l.Set === 4).map(l => (
             <li key={l.Letter}>
-              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges}/>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
         </ul>
@@ -57,7 +57,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
         <ul>
           {this.props.LetterData.filter(l => l.Set === 5).map(l => (
             <li key={l.Letter}>
-              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges}/>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
         </ul>
@@ -65,7 +65,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
         <ul>
           {this.props.LetterData.filter(l => l.Set === 6).map(l => (
             <li key={l.Letter}>
-              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges}/>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
         </ul>     
@@ -73,7 +73,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
         <ul>
           {this.props.LetterData.filter(l => l.Set === 7).map(l => (
             <li key={l.Letter}>
-              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges}/>
+              <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
         </ul>      
