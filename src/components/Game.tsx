@@ -71,13 +71,26 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     return this.props.RandomizeArray(arrayOfLettersToSelect);
   }
 
+  // When an item is selected, ensure no other items are selected at the same time.
+  // Set the state of Selected Item to most recently selected item.
   onSelected = (letterData: ILetterData) => {
-    // TODO: Unselect other answers and just leave this one selected (might need IDs and DOM manipulation here)
+    let selectedItems = document.getElementsByClassName('letter-div');
+    for (let index = 0; index < selectedItems.length; index++) {
+      const element = selectedItems[index];
+      element.classList.remove('letter-selected')
+    }
+
+    document.getElementById(letterData.Letter)?.classList.add('letter-selected');
+    
     this.setState({ SelectedAnswer: letterData });
   }
 
   onNext = () => {
-    // TODO: Check if selected answer was correct answer.
+    if (this.state.SelectedAnswer === this.state.CorrectAnswer) {
+      alert('You got it right');
+    } else {
+      alert('You got it wrong')
+    }
 
     // if we reach the end of the selection, randomize the list again with the selected options
     // and set the new correct answer.
@@ -90,6 +103,13 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
       var selectedItemsLessFirst = this.state.SelectedItems.filter(item => item !== this.state.SelectedItems[0]);
       this.setState({ SelectedItems: selectedItemsLessFirst }, () => 
         this.setCorrectAnswer());
+    }
+
+    // reset the selected states of all letters
+    let selectedItems = document.getElementsByClassName('letter-div');
+    for (let index = 0; index < selectedItems.length; index++) {
+      const element = selectedItems[index];
+      element.classList.remove('letter-selected')
     }
   }
 

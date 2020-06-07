@@ -165,7 +165,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
     // render single letter sounds only
     if (this.props.LetterData.Letter.length === 1) {
       return(
-        <div className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
+        <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
           <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter()}</div>
         </div>        
       )
@@ -174,7 +174,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       if (this.props.LetterData.Letter.includes('_')) {
         return(
           <div>
-            <div className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
+            <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
               <div className={`letter-rotated ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1).toLowerCase())}</div>
               <div className={`letter-rotated -ml-10 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(2, 1).toLowerCase())}</div>
             </div>
@@ -182,7 +182,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       )} else {
         // render two letter sounds such as 'ai' or 'th'
         return(      
-          <div className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
+          <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
             <div className={`${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(0, 1))}</div>
             <div className={`-ml-8 ${this.props.Size === 'small' ? 'letter-div-small' : 'letter-div-large'}`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1))}</div>
           </div>                

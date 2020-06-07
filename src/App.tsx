@@ -236,7 +236,7 @@ class App extends React.PureComponent<{},IAppState> {
             </Route>
             <Route path="/game">
               <Game 
-                ItemData={this.state.SelectedItems} 
+                ItemData={this.randomizeArray(this.state.SelectedItems)} 
                 Alphabet={AlphabetData}
                 LanguageSelection={this.state.LanguageSelection} 
                 LetterData={this.state.SavedData} 
