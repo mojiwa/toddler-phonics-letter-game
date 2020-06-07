@@ -1,6 +1,7 @@
 import React from 'react';
 import { ILetterData, IItemData, LanguageSelection, GameType } from '../interfaces';
 import Letter from './Letter';
+import Modal from './Modal';
 
 interface IGameProps {
   LetterData: ILetterData[];
@@ -16,6 +17,9 @@ interface IGameState {
   LetterSelection: ILetterData[];
   CorrectAnswer: ILetterData;
   SelectedAnswer: ILetterData;
+  ShowModal: boolean;
+  ModalTitleText: string;
+  ModalText: string;
 }
 
 const EMPTY_LETTER_DATA_ARRAY: ILetterData[] = [];
@@ -36,7 +40,10 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     SelectedItems: this.props.ItemData,
     LetterSelection: EMPTY_LETTER_DATA_ARRAY,
     CorrectAnswer: EMPTY_LETTER_DATA,
-    SelectedAnswer: EMPTY_LETTER_DATA
+    SelectedAnswer: EMPTY_LETTER_DATA,
+    ShowModal: false,
+    ModalTitleText: '',
+    ModalText: ''
   }
 
   componentDidMount = () => {
@@ -86,22 +93,23 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
   }
 
   onNext = () => {
-    if (this.state.SelectedAnswer === this.state.CorrectAnswer) {
-      alert('You got it right');
-    } else {
-      alert('You got it wrong')
-    }
+    var win = false;
+    if (this.state.SelectedAnswer === this.state.CorrectAnswer)
+      win = true;
+    this.setState({ShowModal: true, ModalTitleText: win ? 'Correct' : 'Sorry, wrong answer', ModalText: win ? "That's the right answer! Well done" : 'Sorry, please try again' });
+  }
 
+  nextImage = () => {
     // if we reach the end of the selection, randomize the list again with the selected options
     // and set the new correct answer.
     if (this.state.SelectedItems.length === 1) {
-      this.setState({ SelectedItems: this.props.RandomizeArray(this.props.ItemData)}, () => 
+      this.setState({ SelectedItems: this.props.RandomizeArray(this.props.ItemData), ShowModal: false}, () => 
         this.setCorrectAnswer());
     } else {
       // Remove the first item in the list so it displays the next image
       // and sets the new correct answer.
       var selectedItemsLessFirst = this.state.SelectedItems.filter(item => item !== this.state.SelectedItems[0]);
-      this.setState({ SelectedItems: selectedItemsLessFirst }, () => 
+      this.setState({ SelectedItems: selectedItemsLessFirst, ShowModal: false }, () => 
         this.setCorrectAnswer());
     }
 
@@ -119,6 +127,14 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     } else {
       return (
         <div>
+          <Modal 
+            ShowModal={this.state.ShowModal} 
+            ModalCancelText='Try Again' 
+            ModalConfirmText='Next' 
+            ModalOnCancel={() => this.setState({ShowModal: false})} 
+            ModalOnConfirm={() => {this.nextImage()}} 
+            ModalTitle={this.state.ModalTitleText} 
+            ModalText={this.state.ModalText} />
           <div>
             <img 
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
