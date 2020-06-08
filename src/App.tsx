@@ -212,11 +212,12 @@ class App extends React.PureComponent<{},IAppState> {
                 {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/game'>Play Game</Link>}
               </li>
             </ul>
-            <label className='ml-2'>Select Game Type:</label>
+            {/* Disable select game type until after MVP */}
+            {/* <label className='ml-2'>Select Game Type:</label>
             <select id='game-type' name='game-type' onChange={(e) => this.onGameTypeSelect(e.target.value)} value={this.state.GameTypeSelection}>
               <option value={0}>Phonics</option>
               <option value={1}>Letters</option>
-            </select>
+            </select> */}
             <label className='ml-2'>Select Language:</label>
             <select id='language' name='language' onChange={(e) => this.onLanguageSelect(e.target.value)} value={this.state.LanguageSelection}>
               <option value={0}>British</option>
