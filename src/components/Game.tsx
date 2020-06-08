@@ -170,14 +170,6 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
             <img 
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
               onClick={() => this.playSound(this.props.LanguageSelection === LanguageSelection.British ? this.state.SelectedItems[0].BritishAudioUrl : this.state.SelectedItems[0].AmericanAudioUrl)}/>
-            <div className='flex-row'>
-              <div> 
-                Question: {this.state.Question}
-              </div>
-              <div>
-                Score: {this.state.Score}
-              </div>
-            </div>
           </div>
           <div className='flex'>
             {this.state.LetterSelection.map(letter => (
@@ -191,9 +183,17 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
               </li>
             ))}
           </div>
-          <div> 
+          <div className='mt-2'> 
             <button onClick={() => this.onNext()}>Next</button>
           </div>
+          <div className='flex-row mt-2'>
+              <div> 
+                Question: {this.state.Question}
+              </div>
+              <div>
+                Score: {this.state.Score}
+              </div>
+            </div>
         </div>
       )
     }
