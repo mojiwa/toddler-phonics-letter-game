@@ -51,7 +51,7 @@ li {
 
 @media (hover) {
     .letter-div:hover > div > svg > .letter-fill {
-        fill: cadetblue;    
+        fill: #6B46C0;    
     }
 }
 
@@ -60,7 +60,7 @@ li {
 }
 
 .letter-fill {
-    fill: crimson;
+    fill: #ECC94A;
 }
 
 .letter-border {
@@ -82,11 +82,11 @@ li {
 }
 
 .letter-selected > div > svg > .letter-fill {
-    fill: wheat;
+    fill: #6B46C0;
 }
 
 @media (hover) {
     .letter-selected:hover > div > svg > .letter-fill {
-        fill: wheat;
+        fill: #6B46C0;
     }
 }

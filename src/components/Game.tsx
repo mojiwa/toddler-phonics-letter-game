@@ -175,8 +175,7 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
             {this.state.LetterSelection.map(letter => (
               <li key={letter.Letter}>
                 <Letter 
-                  LetterData={letter} 
-                  Size='small' 
+                  LetterData={letter}
                   LanguagePreference={this.props.LanguageSelection} 
                   PlayAudio={true} 
                   ApplyChanges={() => this.onSelected(letter)} />
