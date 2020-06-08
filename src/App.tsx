@@ -141,6 +141,10 @@ class App extends React.PureComponent<{},IAppState> {
     this.setState({GameTypeSelection: gameTypeSelection});
   }
 
+  /** 
+   * We always save the entire letter set, however the letter that has just been selected
+   * or unselected is updated. We then pass that updated set to the setSelectedItems method
+  */
   applyChanges = (letterData: ILetterData) => {
     var letterSetToSave = this.state.SavedData;
     var indexToSplice = letterSetToSave.findIndex(l => l.Letter === letterData.Letter);
