@@ -18,14 +18,14 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
     return(
       <div>
         <div>
-          Right-Click or long-press on a letter to hear its pronunciation. You can switch between British and American English in the options menu above.
+          Tap on a <a className='text-purple-700 hover:underline' target='_blank' rel='noopener noreferrer' href='https://www.theschoolrun.com/what-is-a-grapheme'>grapheme</a> select it. You can switch between British and American English in the options menu above.
         </div>
         <br />
         Set 1
         <ul className='flex flex-wrap'>
           {this.props.LetterData.filter(l => l.Set === 1).map(l => (
             <li key={l.Letter}>
-              <Letter LetterData={l} LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
+              <Letter LetterData={l} LanguagePreference={this.props.LanguageSelection} PlayAudio={false} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
         </ul>       

@@ -126,8 +126,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
   }
 
   onSelected = () => {
-    if (!this.state.Selected)
-      this.playAudio();
+    this.playAudio();
     this.setState({Selected: !this.state.Selected}, () => {
       let letterToSave: ILetterData = {
         Letter: this.props.LetterData.Letter,
