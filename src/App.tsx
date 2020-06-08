@@ -268,23 +268,23 @@ class App extends React.PureComponent<{},IAppState> {
           {/* Desktop Menu */}
           <div className='flex x-2 bg-yellow-500 border-purple-700 border-solid border-b-4 hidden md:block'>
             <ul className='w-4/5 mx-auto flex text-purple-700 text-sm md:text-2xl justify-around text-center'>
-              <li className={`p-2 ${this.state.Page === Page.Home ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+              <li className={`p-2 ${this.state.Page === Page.Home ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/3 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
                 <Link to='/' onClick={() => this.setPage(Page.Home)}>
                     <div className='h-full'>Home</div>
                 </Link>
               </li>
-              <li className={`p-2 {this.state.Page === Page.About ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+              <li className={`p-2 {this.state.Page === Page.About ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/3 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
                 <Link to="/about" onClick={() => this.setPage(Page.About)}>
                   <div className='h-full'>About</div>
                 </Link>
               </li>
-              <li className={`p-2 ${this.state.Page === Page.Phonics ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+              <li className={`p-2 ${this.state.Page === Page.Phonics ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/3 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
                 <Link to="/phonics-sets" onClick={() => this.setPage(Page.Phonics)}>
                   <div className='h-full'>Letters</div>
                 </Link>
               </li>
               {/* Don't show link to the game if no letters are selected */}
-              <li className={`p-2 ${this.state.SelectedItems.length === 0 ? 'hidden' : ''} ${this.state.Page === Page.Game ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+              <li className={`p-2 ${this.state.SelectedItems.length === 0 ? 'hidden' : ''} ${this.state.Page === Page.Game ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/3 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
                 <Link to='/game' onClick={() => this.setPage(Page.Game)}>
                   <div className='h-full'>Play</div>
                 </Link>
