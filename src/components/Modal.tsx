@@ -22,11 +22,11 @@ export default class Modal extends React.PureComponent<IModalProps, IModalState>
   render() {
     return (
       <div className={`${this.props.ShowModal ? '' : 'hidden'}`}>
-        <div className="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center">
+        <div className="fixed sm:bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 flex sm:items-center justify-center">
           <div className="fixed inset-0 transition-opacity">
             <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
           </div>
-          <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+          <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start ml-5">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
