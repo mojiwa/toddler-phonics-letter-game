@@ -24,6 +24,7 @@ interface IGameState {
   ModalNextText: string;
   Question: number;
   Score: number;
+  MouseOverImage: boolean;
 }
 
 const EMPTY_LETTER_DATA_ARRAY: ILetterData[] = [];
@@ -51,7 +52,8 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     ModalNeedsCancel: true,
     ModalNextText: 'Next',
     Question: 1,
-    Score: 0
+    Score: 0,
+    MouseOverImage: false
   }
 
   componentDidMount = () => {
@@ -156,7 +158,7 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
       return (<div> </div>) 
     } else {
       return (
-        <div>
+        <div className='w-4/5 mx-auto'>
           <Modal 
             ShowModal={this.state.ShowModal} 
             ModalCancelText='Try Again' 
@@ -166,12 +168,17 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
             ModalTitle={this.state.ModalTitleText} 
             ModalText={this.state.ModalText}
             ModalNeedsCancel={this.state.ModalNeedsCancel} />
-          <div className='flex'>
+          <div className='flex justify-center'>
+            <div className={`${this.state.MouseOverImage ? '' : 'hidden'} absolute self-center text-gray-900 text-lg md:text-2xl`}>Tap to listen</div>
             <img 
+              id='game-image'
+              className={`${this.state.MouseOverImage ? 'opacity-25' : ''} shadow-xl border-solid border-4 border-yellow-500 mb-5 hover:border-purple-700 duration-300 ease-in-out md:w-4/5`}
+              onMouseOver={() => this.setState({ MouseOverImage: true })}
+              onMouseLeave={() => this.setState({ MouseOverImage: false })}
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
               onClick={() => this.playSound(this.props.LanguageSelection === LanguageSelection.British ? this.state.SelectedItems[0].BritishAudioUrl : this.state.SelectedItems[0].AmericanAudioUrl)}/>
           </div>
-          <div className='flex'>
+          <div className='flex justify-center'>
             {this.state.LetterSelection.map(letter => (
               <li key={letter.Letter}>
                 <Letter 
@@ -182,10 +189,8 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
               </li>
             ))}
           </div>
-          <div className='mt-2'> 
-            <button onClick={() => this.onNext()}>Next</button>
-          </div>
-          <div className='flex-row mt-2'>
+          <div className='w-4/5 mx-auto flex mt-2 justify-between items-center'>
+            <div className='flex-row md:text-2xl'>
               <div> 
                 Question: {this.state.Question}
               </div>
@@ -193,6 +198,17 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
                 Score: {this.state.Score}
               </div>
             </div>
+            <div className='mt-2 text-yellow-500 hover:text-purple-700' onClick={() => this.onNext()}> 
+              <svg 
+                fill="currentColor" 
+                stroke="currentColor"
+                viewBox="0 0 20 20" 
+                className='h-16 md:h-24'>
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd">
+                  </path>
+              </svg>
+            </div>
+          </div>
         </div>
       )
     }

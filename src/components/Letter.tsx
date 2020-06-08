@@ -27,8 +27,6 @@ import {ReactComponent as Y} from '../images/y.svg';
 import {ReactComponent as Z} from '../images/z.svg';
 import { ILetterData, LanguageSelection } from '../interfaces';
 
-var timer: NodeJS.Timeout;
-
 interface ILetterProps {
   LetterData: ILetterData;
   LanguagePreference: LanguageSelection;
@@ -121,13 +119,15 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       audio.play();
       setTimeout(() => {
         audio.pause();
-        audio.currentTime = 0;
+        audio.currentTime = 2;
       }, 1000);
     }, 1000);
     audio.play();
   }
 
   onSelected = () => {
+    if (!this.state.Selected)
+      this.playAudio();
     this.setState({Selected: !this.state.Selected}, () => {
       let letterToSave: ILetterData = {
         Letter: this.props.LetterData.Letter,
@@ -141,30 +141,11 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
     return false;
   }
 
-  // To detect a long click, we set a timeout on mousedown. 
-  // If that timer reaches 1sec, we play the audio.
-  onMouseDownEventRouter = () => {
-      if (timer === undefined) timer = setTimeout(() => { 
-        this.playAudio(); 
-        this.setState({AudioPlayed: true}); 
-      }, 500);
-  }
-  
-  // On mouse up, we check to see if the timer was hit and
-  // the audio was played. If not, that means it was a short-click
-  // and so we select the letter.
-  onMouseUp = () => {
-    clearTimeout(timer);
-    if(!this.state.AudioPlayed)
-      this.onSelected();
-    this.setState({AudioPlayed: false});
-  }
-
   render() {
     // render single letter sounds only
     if (this.props.LetterData.Letter.length === 1) {
       return(
-        <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
+        <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected}>
           <div className='h-12 w-12 md:h-24 md:w-24'>{this.renderLetter()}</div>
         </div>        
       )
@@ -173,7 +154,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       if (this.props.LetterData.Letter.includes('_')) {
         return(
           <div>
-            <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
+            <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected}>
               <div className={`letter-rotated h-12 w-12 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1).toLowerCase())}</div>
               <div className={`letter-rotated -ml-10 h-12 w-12 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(2, 1).toLowerCase())}</div>
             </div>
@@ -181,7 +162,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
       )} else {
         // render two letter sounds such as 'ai' or 'th'
         return(      
-          <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected} onContextMenu={this.playAudio}>
+          <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected}>
             <div className={`h-12 w-12 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(0, 1))}</div>
             <div className={`-ml-8 h-12 w-12 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1))}</div>
           </div>                
