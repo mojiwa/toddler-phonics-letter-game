@@ -283,11 +283,11 @@ class App extends React.PureComponent<{},IAppState> {
                   <div className='h-full'>Letters</div>
                 </Link>
               </li>
-              <li className={`p-2 ${this.state.Page === Page.Game ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
-                {/* Don't show link to the game if no letters are selected */}
-                {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/game' onClick={() => this.setPage(Page.Game)}>
+              {/* Don't show link to the game if no letters are selected */}
+              <li className={`p-2 ${this.state.SelectedItems.length === 0 ? 'hidden' : ''} ${this.state.Page === Page.Game ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+                <Link to='/game' onClick={() => this.setPage(Page.Game)}>
                   <div className='h-full'>Play</div>
-                </Link>}
+                </Link>
               </li>
               <li className='p-2 bg-yellow-500 w-1/12' onClick={() => this.setPage(Page.Options)}>
                 <Link to="/options">
