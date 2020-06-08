@@ -22,6 +22,8 @@ interface IGameState {
   ModalText: string;
   ModalNeedsCancel: boolean;
   ModalNextText: string;
+  Question: number;
+  Score: number;
 }
 
 const EMPTY_LETTER_DATA_ARRAY: ILetterData[] = [];
@@ -47,7 +49,9 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     ModalTitleText: '',
     ModalText: '',
     ModalNeedsCancel: true,
-    ModalNextText: 'Next'
+    ModalNextText: 'Next',
+    Question: 1,
+    Score: 0
   }
 
   componentDidMount = () => {
@@ -102,32 +106,48 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     if (this.state.SelectedAnswer === this.state.CorrectAnswer)
       win = true;
     this.setState({ 
-      ShowModal: true, 
+      ShowModal: !win, 
       ModalTitleText: win ? 'Correct' : 'Sorry, wrong answer', 
       ModalText: win ? "That's the right answer! Well done" : 'Sorry, please try again', 
       ModalNeedsCancel: !win, 
-      ModalNextText: win ? 'Next' : 'Skip' });
+      ModalNextText: win ? 'Next' : 'Skip',
+      Score: win ? this.state.Score+1 : this.state.Score }, () => {
+        if (win)
+          this.nextImage();
+      });
   }
 
   nextImage = () => {
-    // if we reach the end of the selection, randomize the list again with the selected options
-    // and set the new correct answer.
-    if (this.state.SelectedItems.length === 1) {
-      this.setState({ SelectedItems: this.props.RandomizeArray(this.props.ItemData), ShowModal: false}, () => 
-        this.setCorrectAnswer());
-    } else {
-      // Remove the first item in the list so it displays the next image
-      // and sets the new correct answer.
-      var selectedItemsLessFirst = this.state.SelectedItems.filter(item => item !== this.state.SelectedItems[0]);
-      this.setState({ SelectedItems: selectedItemsLessFirst, ShowModal: false }, () => 
-        this.setCorrectAnswer());
-    }
+    if (this.state.Question < 10) {
+      // if we reach the end of the selection, randomize the list again with the selected options
+      // and set the new correct answer.
+      if (this.state.SelectedItems.length === 1) {
+        this.setState({ SelectedItems: this.props.RandomizeArray(this.props.ItemData), ShowModal: false, Question: this.state.Question+1 }, () => 
+          this.setCorrectAnswer());
+      } else {
+        // Remove the first item in the list so it displays the next image
+        // and sets the new correct answer.
+        var selectedItemsLessFirst = this.state.SelectedItems.filter(item => item !== this.state.SelectedItems[0]);
+        this.setState({ SelectedItems: selectedItemsLessFirst, ShowModal: false, Question: this.state.Question+1 }, () => 
+          this.setCorrectAnswer());
+      }
 
-    // reset the selected states of all letters
-    let selectedItems = document.getElementsByClassName('letter-div');
-    for (let index = 0; index < selectedItems.length; index++) {
-      const element = selectedItems[index];
-      element.classList.remove('letter-selected')
+      // reset the selected states of all letters
+      let selectedItems = document.getElementsByClassName('letter-div');
+      for (let index = 0; index < selectedItems.length; index++) {
+        const element = selectedItems[index];
+        element.classList.remove('letter-selected')
+      }
+    } else {
+      this.setState({ 
+        ShowModal: true, 
+        ModalTitleText: 'Game over', 
+        ModalText: 'Thanks for playing. You scored: ' + this.state.Score,
+        ModalNeedsCancel: false, 
+        ModalNextText: 'Play Again',
+        Question: 0, 
+        Score: 0
+      });
     }
   }
 
@@ -146,10 +166,18 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
             ModalTitle={this.state.ModalTitleText} 
             ModalText={this.state.ModalText}
             ModalNeedsCancel={this.state.ModalNeedsCancel} />
-          <div>
+          <div className='flex'>
             <img 
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
               onClick={() => this.playSound(this.props.LanguageSelection === LanguageSelection.British ? this.state.SelectedItems[0].BritishAudioUrl : this.state.SelectedItems[0].AmericanAudioUrl)}/>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+              <div> 
+                Question: {this.state.Question}
+              </div>
+              <div>
+                Score: {this.state.Score}
+              </div>
+            </div>
           </div>
           <div>
             {this.state.LetterSelection.map(letter => (
