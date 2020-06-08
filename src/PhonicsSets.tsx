@@ -29,7 +29,9 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
             </li>
           ))}
         </ul>       
-        Set 2 
+        <div>Set 2: Coming soon...</div>
+        {/* Other sets to come later */}
+        {/* Set 2 
         <ul>
           {this.props.LetterData.filter(l => l.Set === 2).map(l => (
             <li key={l.Letter}>
@@ -76,7 +78,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
               <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
             </li>
           ))}
-        </ul>      
+        </ul>       */}
       </div>
     )
   }
