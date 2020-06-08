@@ -10,6 +10,7 @@ import Game from './components/Game';
 import AlphabetData from './AlphabetData.json';
 import PhonicsData from './PhonicsData.json';
 import ItemData from './ItemData.json';
+import Options from './components/Options';
 
 interface IAppState {
   SavedData: ILetterData[];
@@ -199,9 +200,9 @@ class App extends React.PureComponent<{},IAppState> {
   render() {
     return (
       <Router>
-        <div>
+        <div className='container mx-auto'>
           <div className='flex p-2'>
-            <ul>
+           <ul className='h-6'>
               <li className='p-2'>
                 <Link to="/">Home</Link>
               </li>
@@ -213,42 +214,49 @@ class App extends React.PureComponent<{},IAppState> {
               </li>
               <li className='p-2'>
                 {/* Don't show link to the game if no letters are selected */}
-                {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/game'>Play Game</Link>}
+                {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/game'>Play</Link>}
               </li>
-            </ul>
-            {/* Disable select game type until after MVP */}
-            {/* <label className='ml-2'>Select Game Type:</label>
-            <select id='game-type' name='game-type' onChange={(e) => this.onGameTypeSelect(e.target.value)} value={this.state.GameTypeSelection}>
-              <option value={0}>Phonics</option>
-              <option value={1}>Letters</option>
-            </select> */}
-            <label className='ml-2'>Select Language:</label>
-            <select id='language' name='language' onChange={(e) => this.onLanguageSelect(e.target.value)} value={this.state.LanguageSelection}>
-              <option value={0}>British</option>
-              <option value={1}>American</option>
-            </select>
+            </ul>            
+            <Link to="/options">
+              <svg 
+                height='24px'
+                fill="none" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth="2" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor">
+                  <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </Link>            
           </div>
           <hr />
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/phonics-sets">
-              <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} />
-            </Route>
-            <Route path="/game">
-              <Game 
-                ItemData={this.randomizeArray(this.state.SelectedItems)} 
-                Alphabet={AlphabetData}
-                LanguageSelection={this.state.LanguageSelection} 
-                LetterData={this.state.SavedData} 
-                GameType={this.state.GameTypeSelection}
-                RandomizeArray={this.randomizeArray} />
-          </Route>
-          </Switch>
+          <div className='pt-4'>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/options">
+                <Options OnLanguageSave={this.onLanguageSelect} OnGameTypeSave={this.onGameTypeSelect} LanguageSelection={this.state.LanguageSelection} GameTypeSelection={this.state.GameTypeSelection} />
+              </Route>              
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/phonics-sets">
+                <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} />
+              </Route>
+              <Route path="/game">
+                <Game 
+                  ItemData={this.randomizeArray(this.state.SelectedItems)} 
+                  Alphabet={AlphabetData}
+                  LanguageSelection={this.state.LanguageSelection} 
+                  LetterData={this.state.SavedData} 
+                  GameType={this.state.GameTypeSelection}
+                  RandomizeArray={this.randomizeArray} />
+              </Route>
+            </Switch>
+          </div>
         </div>
       </Router>
     );

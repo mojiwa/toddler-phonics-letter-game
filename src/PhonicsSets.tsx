@@ -22,7 +22,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
         </div>
         <br />
         Set 1
-        <ul>
+        <ul className='flex flex-wrap'>
           {this.props.LetterData.filter(l => l.Set === 1).map(l => (
             <li key={l.Letter}>
               <Letter LetterData={l} Size='small' LanguagePreference={this.props.LanguageSelection} PlayAudio={true} ApplyChanges={this.props.ApplyChanges} />
