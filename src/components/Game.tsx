@@ -20,6 +20,8 @@ interface IGameState {
   ShowModal: boolean;
   ModalTitleText: string;
   ModalText: string;
+  ModalNeedsCancel: boolean;
+  ModalNextText: string;
 }
 
 const EMPTY_LETTER_DATA_ARRAY: ILetterData[] = [];
@@ -29,7 +31,7 @@ const EMPTY_LETTER_DATA: ILetterData = {
   IsSelected: false,
   Set: 0,
   AmericanAudioUrl: '', 
-  BritishAudioUrl: ''
+  BritishAudioUrl: '',  
 }
 
 /**
@@ -43,7 +45,9 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     SelectedAnswer: EMPTY_LETTER_DATA,
     ShowModal: false,
     ModalTitleText: '',
-    ModalText: ''
+    ModalText: '',
+    ModalNeedsCancel: true,
+    ModalNextText: 'Next'
   }
 
   componentDidMount = () => {
@@ -92,11 +96,17 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     this.setState({ SelectedAnswer: letterData });
   }
 
+  // Determine if the selection was correct and display the corresponding Modal
   onNext = () => {
     var win = false;
     if (this.state.SelectedAnswer === this.state.CorrectAnswer)
       win = true;
-    this.setState({ShowModal: true, ModalTitleText: win ? 'Correct' : 'Sorry, wrong answer', ModalText: win ? "That's the right answer! Well done" : 'Sorry, please try again' });
+    this.setState({ 
+      ShowModal: true, 
+      ModalTitleText: win ? 'Correct' : 'Sorry, wrong answer', 
+      ModalText: win ? "That's the right answer! Well done" : 'Sorry, please try again', 
+      ModalNeedsCancel: !win, 
+      ModalNextText: win ? 'Next' : 'Skip' });
   }
 
   nextImage = () => {
@@ -130,11 +140,12 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
           <Modal 
             ShowModal={this.state.ShowModal} 
             ModalCancelText='Try Again' 
-            ModalConfirmText='Next' 
+            ModalConfirmText={this.state.ModalNextText} 
             ModalOnCancel={() => this.setState({ShowModal: false})} 
             ModalOnConfirm={() => {this.nextImage()}} 
             ModalTitle={this.state.ModalTitleText} 
-            ModalText={this.state.ModalText} />
+            ModalText={this.state.ModalText}
+            ModalNeedsCancel={this.state.ModalNeedsCancel} />
           <div>
             <img 
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
