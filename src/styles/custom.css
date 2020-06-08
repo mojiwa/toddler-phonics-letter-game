@@ -9,7 +9,7 @@ html {
 
 body {
     height: 100%;
-    background-color: #2C5282;
+    background-color: #FFF;
     user-select: none;
 }
 
@@ -19,6 +19,13 @@ svg {
 
 li {
     display: inline;
+}
+ /*
+* === Mobile Menu ===
+*/
+
+.mobile-menu > li {
+    display: list-item;
 }
 
 /*

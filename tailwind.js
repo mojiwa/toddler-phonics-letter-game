@@ -232,6 +232,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        'Varela Round',
         'system-ui',
         '-apple-system',
         'BlinkMacSystemFont',

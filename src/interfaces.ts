@@ -33,3 +33,11 @@ export enum GameType {
     Phonics,
     Letters
 }
+
+export enum Page {
+    Home,
+    About,
+    Phonics,
+    Game,
+    Options
+}

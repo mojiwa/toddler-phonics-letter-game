@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import About from './About';
 import Home from './Home';
 import PhonicsSets from './PhonicsSets';
-import { ILetterData, LanguageSelection, IItemData, GameType } from './interfaces';
+import { ILetterData, LanguageSelection, IItemData, GameType, Page } from './interfaces';
 import Game from './components/Game';
 
 import AlphabetData from './AlphabetData.json';
@@ -18,6 +18,8 @@ interface IAppState {
   GameTypeSelection: GameType;
   ItemData: IItemData[];
   SelectedItems: IItemData[];
+  Page: Page;
+  ShowMobileMenu: boolean;
 }
 
 const SAVED_DATA_KEY: string = 'savedLettersAndSets';
@@ -30,7 +32,9 @@ class App extends React.PureComponent<{},IAppState> {
     LanguageSelection: this.getLanguageSelection(),
     GameTypeSelection: this.getGameTypeSelection(),
     ItemData: JSON.parse(JSON.stringify(ItemData)) as IItemData[],
-    SelectedItems: this.setSelectedItems(this.getData())
+    SelectedItems: this.setSelectedItems(this.getData()),
+    Page: Page.Home,
+    ShowMobileMenu: false
   }
 
   /** 
@@ -197,39 +201,111 @@ class App extends React.PureComponent<{},IAppState> {
     return array;
   }
 
+  setPage = (page: Page) => {
+    this.setState({ Page: page, ShowMobileMenu: false });
+  }
+
+  openMobileMenu = () => {
+    console.log('I have been clicked')
+  }
+
   render() {
     return (
       <Router>
-        <div className='container mx-auto'>
-          <div className='flex p-2'>
-           <ul className='h-6'>
-              <li className='p-2'>
-                <Link to="/">Home</Link>
+        <div className=''>
+          {/* Mobile menu */}
+          <div className='flex-row md:hidden'>
+            <div className='flex x-2 items-center justify-between bg-yellow-500'>
+              <div onClick={() => this.setState({ShowMobileMenu: !this.state.ShowMobileMenu})}>
+                <svg fill={`${this.state.ShowMobileMenu ? 'white' : '#6B46C0'}`} viewBox="0 0 20 20" width='35px'>
+                  <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd">
+                  </path>
+                </svg>
+              </div>
+              <div className='p-2 bg-yellow-500' onClick={() => this.setPage(Page.Options)}>
+                  <Link to="/options">
+                    <svg 
+                      className={`${this.state.Page === Page.Options ? 'text-white' : 'text-purple-700'}`}
+                      width='35px'
+                      fill="none" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth="2" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor">
+                        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                  </Link>    
+                </div>
+              </div>
+              <div className='absolute w-full'>
+                <ul className={`text-purple-700 text-xl mobile-menu ${this.state.ShowMobileMenu ? '' : 'hidden'}`}>
+                  <li className={`p-2 ${this.state.Page === Page.Home ? 'bg-purple-700 text-white' : 'bg-yellow-500'}`}>
+                    <Link to='/' onClick={() => this.setPage(Page.Home)}>
+                        <div>Home</div>
+                    </Link>
+                  </li>
+                  <li className={`p-2 ${this.state.Page === Page.About ? 'bg-purple-700 text-white' : 'bg-yellow-500'}`}>
+                    <Link to="/about" onClick={() => this.setPage(Page.About)}>
+                      <div>About</div>
+                    </Link>
+                  </li>
+                  <li className={`p-2 ${this.state.Page === Page.Phonics ? 'bg-purple-700 text-white' : 'bg-yellow-500'}`}>
+                    <Link to="/phonics-sets" onClick={() => this.setPage(Page.Phonics)}>
+                      <div>Letters</div>
+                    </Link>
+                  </li>
+                  <li className={`p-2 ${this.state.Page === Page.Game ? 'bg-purple-700 text-white' : 'bg-yellow-500'}`}>
+                    {/* Don't show link to the game if no letters are selected */}
+                    {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/game' onClick={() => this.setPage(Page.Game)}>
+                      <div>Play</div>
+                    </Link>}
+                  </li>
+                </ul>
+              </div>
+          </div>
+          {/* Desktop Menu */}
+          <div className='flex x-2 bg-yellow-500 border-purple-700 border-solid border-b-4 hidden md:block'>
+            <ul className='w-4/5 mx-auto flex text-purple-700 text-sm md:text-2xl justify-around text-center'>
+              <li className={`p-2 ${this.state.Page === Page.Home ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+                <Link to='/' onClick={() => this.setPage(Page.Home)}>
+                    <div className='h-full'>Home</div>
+                </Link>
               </li>
-              <li className='p-2'>
-                <Link to="/about">About</Link>
+              <li className={`p-2 {this.state.Page === Page.About ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+                <Link to="/about" onClick={() => this.setPage(Page.About)}>
+                  <div className='h-full'>About</div>
+                </Link>
               </li>
-              <li className='p-2'>
-                <Link to="/phonics-sets">Phonics Sets</Link>
+              <li className={`p-2 ${this.state.Page === Page.Phonics ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+                <Link to="/phonics-sets" onClick={() => this.setPage(Page.Phonics)}>
+                  <div className='h-full'>Letters</div>
+                </Link>
               </li>
-              <li className='p-2'>
+              <li className={`p-2 ${this.state.Page === Page.Game ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/4 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
                 {/* Don't show link to the game if no letters are selected */}
-                {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/game'>Play</Link>}
+                {this.state.SelectedItems.length === 0 ? <div> </div> : <Link to='/game' onClick={() => this.setPage(Page.Game)}>
+                  <div className='h-full'>Play</div>
+                </Link>}
               </li>
-            </ul>            
-            <Link to="/options">
-              <svg 
-                height='24px'
-                fill="none" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth="2" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor">
-                  <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-            </Link>            
+              <li className='p-2 bg-yellow-500 w-1/12' onClick={() => this.setPage(Page.Options)}>
+                <Link to="/options">
+                  <svg 
+                    className={`${this.state.Page === Page.Options ? 'text-white' : 'text-purple-700'} hover:text-white duration-300 ease-out`}
+                    width='24px'
+                    fill="none" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth="2" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor">
+                      <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                      <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </Link>    
+              </li>
+            </ul>   
           </div>
           <hr />
           <div className='pt-4'>
