@@ -11,7 +11,7 @@ interface IOptionsProps {
 export default class Options extends React.PureComponent<IOptionsProps, {}> {
     render() {
         return(
-            <div>
+            <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 mt-2 md:mt-10 shadow-2xl'>
                 <div className='mb-4'>
                     <label className='mr-6'>Select Language:</label>
                     <select id='language' name='language' onChange={(e) => this.props.OnLanguageSave(e.target.value)} value={this.props.LanguageSelection}>

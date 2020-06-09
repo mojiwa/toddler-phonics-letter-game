@@ -158,7 +158,7 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
       return (<div> </div>) 
     } else {
       return (
-        <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 mt-2 md:mt-5 shadow-2xl'>
+        <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 mt-2 md:mt-10 shadow-2xl'>
           <Modal 
             ShowModal={this.state.ShowModal} 
             ModalCancelText='Try Again' 

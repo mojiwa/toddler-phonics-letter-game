@@ -16,9 +16,9 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{
 
   render() {
     return(
-      <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 mt-10 shadow-2xl'>
+      <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 md:mt-10 shadow-2xl'>
         <div>
-          Tap on a <a className='text-purple-700 hover:underline' target='_blank' rel='noopener noreferrer' href='https://www.theschoolrun.com/what-is-a-grapheme'>grapheme</a> select it. You can switch between British and American English in the options menu above.
+          Tap on a <a className='text-purple-700 hover:underline' target='_blank' rel='noopener noreferrer' href='https://www.theschoolrun.com/what-is-a-grapheme'>grapheme</a> to select it. You can switch between British and American English in the options menu above.
         </div>
         <br />
         Set 1
