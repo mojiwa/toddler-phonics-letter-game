@@ -9,7 +9,7 @@ html {
 
 body {
     height: 100%;
-    background-color: #FFF;
+    background-color: #6B46C0;
     user-select: none;
 }
 
@@ -51,7 +51,7 @@ li {
 
 @media (hover) {
     .letter-div:hover > div > svg > .letter-fill {
-        fill: #6B46C0;    
+        fill: #9F7AEA;    
     }
 }
 
@@ -60,7 +60,7 @@ li {
 }
 
 .letter-fill {
-    fill: #ECC94A;
+    fill: #D6BCFA;
 }
 
 .letter-border {
@@ -82,11 +82,11 @@ li {
 }
 
 .letter-selected > div > svg > .letter-fill {
-    fill: #6B46C0;
+    fill: #6B46C1;
 }
 
 @media (hover) {
     .letter-selected:hover > div > svg > .letter-fill {
-        fill: #6B46C0;
+        fill: #9F7AEA;
     }
 }

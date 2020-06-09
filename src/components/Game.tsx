@@ -158,7 +158,7 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
       return (<div> </div>) 
     } else {
       return (
-        <div className='w-4/5 mx-auto'>
+        <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 mt-2 md:mt-5 shadow-2xl'>
           <Modal 
             ShowModal={this.state.ShowModal} 
             ModalCancelText='Try Again' 
@@ -172,7 +172,7 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
             <div className={`${this.state.MouseOverImage ? '' : 'hidden'} absolute self-center text-gray-900 text-lg md:text-2xl`}>Tap to listen</div>
             <img 
               id='game-image'
-              className={`${this.state.MouseOverImage ? 'opacity-25' : ''} shadow-xl border-solid border-4 border-yellow-500 mb-5 hover:border-purple-700 duration-300 ease-in-out md:w-4/5`}
+              className={`${this.state.MouseOverImage ? 'opacity-25' : ''} shadow-xl border-solid border-4 border-purple-700 mb-5 mt-5 duration-300 ease-in-out md:w-3/5`}
               onMouseOver={() => this.setState({ MouseOverImage: true })}
               onMouseLeave={() => this.setState({ MouseOverImage: false })}
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
@@ -189,7 +189,7 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
               </li>
             ))}
           </div>
-          <div className='w-4/5 mx-auto flex mt-2 justify-between items-center'>
+          <div className='md:w-3/5 mx-auto flex mt-2 justify-between items-center'>
             <div className='flex-row md:text-2xl'>
               <div> 
                 Question: {this.state.Question}
@@ -198,14 +198,30 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
                 Score: {this.state.Score}
               </div>
             </div>
-            <div className='mt-2 text-yellow-500 hover:text-purple-700' onClick={() => this.onNext()}> 
-              <svg 
-                fill="currentColor" 
-                stroke="currentColor"
-                viewBox="0 0 20 20" 
-                className='h-16 md:h-24'>
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd">
-                  </path>
+            <div className='mt-2 text-purple-700 md:text-purple-600 hover:text-purple-700' onClick={() => this.onNext()}> 
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 480 480" fill="currentColor" className='h-16 md:h-24'>
+                <g>
+                  <g>
+                    <path d="M461.248,194.736l-128-128c-24.928-24.96-65.568-24.96-90.496,0C230.656,78.8,224,94.896,224,111.984
+                      s6.656,33.184,18.752,45.248l82.752,82.752l-82.752,82.752C230.656,334.832,224,350.896,224,367.984s6.656,33.152,18.752,45.248
+                      c12.096,12.096,28.16,18.752,45.248,18.752s33.152-6.656,45.248-18.752l128-128C473.344,273.168,480,257.072,480,239.984
+                      S473.344,206.8,461.248,194.736z M438.624,262.608l-128,128c-12.128,12.096-33.12,12.096-45.248,0
+                      c-12.48-12.48-12.48-32.768,0-45.248l105.376-105.376L265.376,134.608c-6.048-6.048-9.376-14.08-9.376-22.624
+                      s3.328-16.576,9.376-22.624c6.24-6.24,14.432-9.376,22.624-9.376c8.192,0,16.384,3.136,22.624,9.344l128,128
+                      c6.048,6.08,9.376,14.112,9.376,22.656S444.672,256.56,438.624,262.608z"/>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M237.248,194.736l-128-128c-24.928-24.96-65.568-24.96-90.496,0C6.656,78.8,0,94.896,0,111.984
+                      s6.656,33.184,18.752,45.248l82.752,82.752l-82.752,82.752C6.656,334.832,0,350.896,0,367.984s6.656,33.152,18.752,45.248
+                      c12.096,12.096,28.16,18.752,45.248,18.752s33.152-6.656,45.248-18.752l128-128C249.344,273.168,256,257.072,256,239.984
+                      S249.344,206.8,237.248,194.736z M214.624,262.608l-128,128c-12.128,12.096-33.12,12.096-45.248,0
+                      c-12.48-12.48-12.48-32.768,0-45.248l105.376-105.376L41.376,134.608C35.328,128.56,32,120.528,32,111.984
+                      s3.328-16.576,9.376-22.624c6.24-6.24,14.432-9.376,22.624-9.376s16.384,3.136,22.624,9.344l128,128
+                      c6.048,6.08,9.376,14.112,9.376,22.656S220.672,256.56,214.624,262.608z"/>
+                  </g>
+                </g>
               </svg>
             </div>
           </div>

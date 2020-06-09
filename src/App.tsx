@@ -307,7 +307,7 @@ class App extends React.PureComponent<{},IAppState> {
               </li>
             </ul>   
           </div>
-          <hr />
+          
           <div className='pt-4'>
             <Switch>
               <Route exact path="/">
