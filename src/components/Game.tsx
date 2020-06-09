@@ -109,10 +109,10 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
       win = true;
     this.setState({ 
       ShowModal: !win, 
-      ModalTitleText: win ? 'Correct' : 'Sorry, wrong answer', 
-      ModalText: win ? "That's the right answer! Well done" : 'Sorry, please try again', 
+      ModalTitleText: 'Sorry, wrong answer', 
+      ModalText: 'Feel free to try again or skip to the next question', 
       ModalNeedsCancel: !win, 
-      ModalNextText: win ? 'Next' : 'Skip',
+      ModalNextText: 'Skip',
       Score: win ? this.state.Score+1 : this.state.Score }, () => {
         if (win)
           this.nextImage();
@@ -168,8 +168,9 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
             ModalTitle={this.state.ModalTitleText} 
             ModalText={this.state.ModalText}
             ModalNeedsCancel={this.state.ModalNeedsCancel} />
-          <div className='flex justify-center'>
-            <div className={`${this.state.MouseOverImage ? '' : 'hidden'} absolute self-center text-gray-900 text-lg md:text-2xl`}>Tap to listen</div>
+          <div className='mobile-image-tap text-center text-purple-700 font-bold'>Tap image to listen</div>
+          <div className='flex justify-center'>            
+            <div className={`${this.state.MouseOverImage ? '' : 'hidden'} absolute self-center text-gray-900 text-lg md:text-2xl`}>Click to listen</div>
             <img 
               id='game-image'
               className={`${this.state.MouseOverImage ? 'opacity-25' : ''} shadow-xl border-solid border-4 border-purple-700 mb-5 mt-5 duration-300 ease-in-out md:w-3/5`}
