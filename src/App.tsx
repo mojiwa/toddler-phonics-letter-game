@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import About from './About';
-import Home from './Home';
 import PhonicsSets from './PhonicsSets';
 import { ILetterData, LanguageSelection, IItemData, GameType, Page } from './interfaces';
 import Game from './components/Game';
@@ -35,6 +34,25 @@ class App extends React.PureComponent<{},IAppState> {
     SelectedItems: this.setSelectedItems(this.getData()),
     Page: Page.Home,
     ShowMobileMenu: false
+  }
+
+  componentDidUpdate() {
+    // when the navigation buttons are pressed, ensure
+    // the selected menu item matches the correct page
+    window.onpopstate = (e: any) => {
+      let url: string = e.currentTarget.document.URL;      
+      if (url.includes('phonics-sets')) {
+        this.setPage(Page.Phonics);
+      } else if (url.includes('game')) {
+        this.setPage(Page.Game);
+      } else if (url.includes('options')) {
+        this.setPage(Page.Options);
+      } else if (url.includes('about')) {
+        this.setPage(Page.About);
+      } else {
+        this.setPage(Page.Home);
+      }
+    }
   }
 
   /** 
@@ -201,12 +219,34 @@ class App extends React.PureComponent<{},IAppState> {
     return array;
   }
 
+  // Sets the current page which is used to define which menu
+  // tab is highlighted
   setPage = (page: Page) => {
     this.setState({ Page: page, ShowMobileMenu: false });
   }
 
   openMobileMenu = () => {
     console.log('I have been clicked')
+  }
+
+  Home = () => {
+    return(
+      <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 md:mt-10 shadow-2xl'>      
+        Some stuff here
+        <div className='border-purple-500 border-double border-8 w-1/4 text-center mx-auto text-2xl rounded-lg shadow-2xl bg-purple-700 text-white focus:bg-purple-500'>
+          <Link to='/phonics-sets' onClick={() => this.setPage(Page.Phonics)}>
+            <div >
+              Start
+            </div>
+            <Router>
+                <Switch>
+                    <Route exact path='/phonics-sets' component={PhonicsSets}/>
+                </Switch>
+            </Router>        
+          </Link>      
+        </div> 
+      </div>
+    );
   }
 
   render() {
@@ -273,7 +313,7 @@ class App extends React.PureComponent<{},IAppState> {
                     <div className='h-full'>Home</div>
                 </Link>
               </li>
-              <li className={`p-2 {this.state.Page === Page.About ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/3 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
+              <li className={`p-2 ${this.state.Page === Page.About ? 'bg-purple-700 text-white' : 'bg-yellow-500'} w-1/3 hover:bg-purple-700 hover:text-white duration-300 ease-out`}>
                 <Link to="/about" onClick={() => this.setPage(Page.About)}>
                   <div className='h-full'>About</div>
                 </Link>
@@ -306,24 +346,23 @@ class App extends React.PureComponent<{},IAppState> {
                 </Link>    
               </li>
             </ul>   
-          </div>
+          </div>          
           
           <div className='pt-4'>
             <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
+              <Route exact path="/" component={this.Home} />                
               <Route path="/options">
-                <Options OnLanguageSave={this.onLanguageSelect} OnGameTypeSave={this.onGameTypeSelect} LanguageSelection={this.state.LanguageSelection} GameTypeSelection={this.state.GameTypeSelection} />
+                <Options SetPage={this.setPage} OnLanguageSave={this.onLanguageSelect} OnGameTypeSave={this.onGameTypeSelect} LanguageSelection={this.state.LanguageSelection} GameTypeSelection={this.state.GameTypeSelection} />
               </Route>              
               <Route path="/about">
-                <About />
+                <About SetPage={this.setPage} />
               </Route>
               <Route path="/phonics-sets">
-                <PhonicsSets LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} />
+                <PhonicsSets SetPage={this.setPage} LetterData={this.state.SavedData} LanguageSelection={this.state.LanguageSelection} ApplyChanges={this.applyChanges} />
               </Route>
               <Route path="/game">
                 <Game 
+                  SetPage={this.setPage}
                   ItemData={this.randomizeArray(this.state.SelectedItems)} 
                   Alphabet={AlphabetData}
                   LanguageSelection={this.state.LanguageSelection} 

@@ -1,14 +1,19 @@
 import React from 'react';
-import { LanguageSelection, GameType } from '../interfaces';
+import { LanguageSelection, GameType, Page } from '../interfaces';
 
 interface IOptionsProps {
     OnLanguageSave: Function;
     OnGameTypeSave: Function;
     LanguageSelection: LanguageSelection;
     GameTypeSelection: GameType;
+    SetPage: Function
 }
 
 export default class Options extends React.PureComponent<IOptionsProps, {}> {
+    componentDidMount() {
+        this.props.SetPage(Page.Options);
+    }
+
     render() {
         return(
             <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 mt-2 md:mt-10 shadow-2xl'>

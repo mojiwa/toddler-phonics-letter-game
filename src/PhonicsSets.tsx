@@ -1,11 +1,12 @@
 import React from 'react';
 import Letter from './components/Letter';
-import { ILetterData, LanguageSelection } from './interfaces';
+import { ILetterData, LanguageSelection, Page } from './interfaces';
 
 interface IPhonicsSetsProps {
   LetterData: ILetterData[];
   LanguageSelection: LanguageSelection;
   ApplyChanges: Function;
+  SetPage: Function;
 }
 
 /** 
@@ -13,6 +14,10 @@ interface IPhonicsSetsProps {
  * in the game. Selected letters are saved to web storage. 
 */
 export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps,{}> {  
+
+  componentDidMount() {
+    this.props.SetPage(Page.Phonics);
+  }
 
   render() {
     return(

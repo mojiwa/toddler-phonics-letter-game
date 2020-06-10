@@ -1,5 +1,5 @@
 import React from 'react';
-import { ILetterData, IItemData, LanguageSelection, GameType } from '../interfaces';
+import { ILetterData, IItemData, LanguageSelection, GameType, Page } from '../interfaces';
 import Letter from './Letter';
 import Modal from './Modal';
 
@@ -10,6 +10,7 @@ interface IGameProps {
   LanguageSelection: LanguageSelection;
   GameType: GameType;
   RandomizeArray: Function;
+  SetPage: Function;
 }
 
 interface IGameState { 
@@ -57,6 +58,7 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
   }
 
   componentDidMount = () => {
+    this.props.SetPage(Page.Game);
     this.setCorrectAnswer();
   }
 
