@@ -233,7 +233,7 @@ class App extends React.PureComponent<{},IAppState> {
     return(
       <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 md:mt-10 shadow-2xl'>      
         Some stuff here
-        <div className='border-purple-500 border-double border-8 w-1/4 text-center mx-auto text-2xl rounded-lg shadow-2xl bg-purple-700 text-white focus:bg-purple-500'>
+        <div className='border-purple-500 border-double border-4 md:border-8 w-1/4 text-center mx-auto md:text-2xl rounded-lg shadow-2xl bg-purple-700 text-white focus:bg-purple-500'>
           <Link to='/phonics-sets' onClick={() => this.setPage(Page.Phonics)}>
             <div >
               Start
