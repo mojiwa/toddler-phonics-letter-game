@@ -118,10 +118,9 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
     setTimeout(() => {
       audio.play();
       setTimeout(() => {
-        audio.pause();
-        audio.currentTime = 2;
-      }, 1000);
-    }, 1000);
+        audio.pause();        
+      }, 1);
+    }, 1500);
     audio.play();
   }
 
