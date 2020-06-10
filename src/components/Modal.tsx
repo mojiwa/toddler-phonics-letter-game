@@ -23,7 +23,7 @@ export default class Modal extends React.PureComponent<IModalProps, IModalState>
   render() {
     return (
       <div className={`${this.props.ShowModal ? '' : 'hidden'}`}>
-        <div className="fixed sm:bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 flex sm:items-center justify-center">
+        <div className="z-10 fixed sm:bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 flex sm:items-center justify-center">
           <div className="fixed inset-0 transition-opacity">
             <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
           </div>

@@ -231,21 +231,21 @@ class App extends React.PureComponent<{},IAppState> {
 
   Home = () => {
     return(
-      <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 md:mt-10 shadow-2xl'>      
-        Some stuff here
-        <div className='border-purple-500 border-double border-4 md:border-8 w-1/4 text-center mx-auto md:text-2xl rounded-lg shadow-2xl bg-purple-700 text-white focus:bg-purple-500'>
+      <div className='w-4/5 md:w-3/5 flex justify-center mx-auto bg-yellow-500 rounded-lg p-4 md:mt-10 shadow-2xl'>              
+        <div className='flex-row text-center'>
+          <div className='mb-4 text-left'>
+            This game is designed for toddlers and young children to grasp the basics of learning the alphabet through phonics.
+          </div>
           <Link to='/phonics-sets' onClick={() => this.setPage(Page.Phonics)}>
-            <div >
-              Start
-            </div>
+            <button className='border-purple-500 px-8 py-4 border-solid border-4 text-center md:text-2xl rounded-lg shadow-2xl bg-purple-700 text-white hover:bg-purple-600'>Start</button>
             <Router>
                 <Switch>
                     <Route exact path='/phonics-sets' component={PhonicsSets}/>
                 </Switch>
-            </Router>        
-          </Link>      
-        </div> 
-      </div>
+            </Router>            
+          </Link>                 
+        </div>                
+      </div>      
     );
   }
 
@@ -279,7 +279,7 @@ class App extends React.PureComponent<{},IAppState> {
                   </Link>    
                 </div>
               </div>
-              <div className='absolute w-full'>
+              <div className='absolute w-full z-10'>
                 <ul className={`text-purple-700 text-xl mobile-menu ${this.state.ShowMobileMenu ? '' : 'hidden'}`}>
                   <li className={`p-2 ${this.state.Page === Page.Home ? 'bg-purple-700 text-white' : 'bg-yellow-500'}`}>
                     <Link to='/' onClick={() => this.setPage(Page.Home)}>

@@ -170,7 +170,8 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
             ModalTitle={this.state.ModalTitleText} 
             ModalText={this.state.ModalText}
             ModalNeedsCancel={this.state.ModalNeedsCancel} />
-          <div className='mobile-image-tap text-center text-purple-700 font-bold'>Tap image to listen</div>
+          <div className='text-center text-purple-700 font-bold md:text-xl'>What sound does the image below begin with?</div>
+          <div className='mobile-image-tap text-center text-purple-700'>Tap image to listen</div>
           <div className='flex justify-center'>            
             <div className={`${this.state.MouseOverImage ? '' : 'hidden'} absolute self-center text-gray-900 text-lg md:text-2xl`}>Click to listen</div>
             <img 
