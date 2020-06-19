@@ -144,7 +144,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
     if (this.props.LetterData.Letter.length === 1) {
       return(
         <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected}>
-          <div className='h-20 w-20 md:h-24 md:w-24'>{this.renderLetter()}</div>
+          <div className='h-20 w-20 md:h-32 md:w-32'>{this.renderLetter()}</div>
         </div>        
       )
     } else {      
@@ -153,16 +153,16 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
         return(
           <div>
             <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected}>
-              <div className={`letter-rotated h-12 w-12 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1).toLowerCase())}</div>
-              <div className={`letter-rotated -ml-10 h-12 w-12 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(2, 1).toLowerCase())}</div>
+              <div className={`letter-rotated h-20 w-20 md:h-32 md:w-32`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1).toLowerCase())}</div>
+              <div className={`letter-rotated -ml-10 h-20 w-20 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(2, 1).toLowerCase())}</div>
             </div>
           </div>
       )} else {
         // render two letter sounds such as 'ai' or 'th'
         return(      
           <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected}>
-            <div className={`h-12 w-12 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(0, 1))}</div>
-            <div className={`-ml-8 h-12 w-12 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1))}</div>
+            <div className={`h-20 w-20 md:h-32 md:w-32`}>{this.renderLetter(this.props.LetterData.Letter.substr(0, 1))}</div>
+            <div className={`-ml-8 h-20 w-20 md:h-32 md:w-32`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1))}</div>
           </div>                
         );
       }
