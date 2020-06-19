@@ -29,7 +29,7 @@ export default class PhonicsSets extends React.PureComponent<IPhonicsSetsProps, 
     this.showPlayGameButton()
   }
 
-  componentWillReceiveProps() {    
+  UNSAFE_componentWillReceiveProps() {    
     this.showPlayGameButton()
   }
 
