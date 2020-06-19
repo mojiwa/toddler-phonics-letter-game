@@ -154,7 +154,7 @@ export default class Letter extends React.PureComponent<ILetterProps, {}> {
           <div>
             <div id={this.props.LetterData.Letter} className={`letter-div ${this.state.Selected ? 'letter-selected' : ''}`} onClick={this.onSelected}>
               <div className={`letter-rotated h-20 w-20 md:h-32 md:w-32`}>{this.renderLetter(this.props.LetterData.Letter.substr(1, 1).toLowerCase())}</div>
-              <div className={`letter-rotated -ml-10 h-20 w-20 md:h-24 md:w-24`}>{this.renderLetter(this.props.LetterData.Letter.substr(2, 1).toLowerCase())}</div>
+              <div className={`letter-rotated -ml-10 h-20 w-20 md:h-32 md:w-32`}>{this.renderLetter(this.props.LetterData.Letter.substr(2, 1).toLowerCase())}</div>
             </div>
           </div>
       )} else {
