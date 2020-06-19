@@ -123,12 +123,12 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
       setTimeout(() => {
         this.setState({Win: false}); 
         this.nextImage();
-      }, 2000);
+      }, 1000);
     }
   }
 
   nextImage = () => {
-    if (this.state.Question < 10) {
+    if (this.state.Question < 5) {
       // if we reach the end of the selection, randomize the list again with the selected options
       // and set the new correct answer.
       if (this.state.SelectedItems.length === 1) {
@@ -180,12 +180,12 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
           <div className='mobile-image-tap text-center text-purple-700'>Tap image to listen</div>
           <div className='flex justify-center'>            
             <div className={`${this.state.MouseOverImage ? '' : 'hidden'} absolute self-center text-gray-900 text-lg md:text-2xl`}>Click to listen</div>
-            <div className={`${this.state.Win ? 'opacity-100' : 'opacity-0'} p-4 duration-500 ease-in-out transform absolute self-center text-gray-900 text-lg md:text-2xl rounded-lg border-4 border-solid border-purple-700`}>
+            <div className={`${this.state.Win ? 'opacity-100' : 'opacity-0'} p-4 duration-400 ease-in-out transform absolute self-center text-gray-900 text-lg md:text-2xl rounded-lg border-4 border-solid border-purple-700`}>
               Well done!
             </div>
             <img 
               id='game-image'
-              className={`${this.state.MouseOverImage ? 'opacity-25' : ''} ${this.state.Win ? 'pointer-events-none opacity-0' : ''} shadow-xl border-solid border-4 border-purple-700 mb-5 mt-5 duration-300 ease-in-out md:w-3/5`}
+              className={`${this.state.MouseOverImage ? 'opacity-25' : ''} ${this.state.Win ? 'pointer-events-none opacity-0' : ''} transform duration-400 ease-in-out shadow-xl border-solid border-4 border-purple-700 mb-5 mt-5 duration-300 ease-in-out md:w-3/5`}
               onMouseOver={() => this.setState({ MouseOverImage: true })}
               onMouseLeave={() => this.setState({ MouseOverImage: false })}
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
@@ -205,10 +205,10 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
           <div className='md:w-3/5 mx-auto flex mt-2 justify-between items-center'>
             <div className='flex-row md:text-2xl'>
               <div> 
-                Question: {this.state.Question}
+                Question: {this.state.Question}/5
               </div>
               <div>
-                Score: {this.state.Score}
+                Score: {this.state.Score}/5
               </div>
             </div>
             <div className='mt-2 text-purple-700 md:text-purple-600 hover:text-purple-700' onClick={() => this.onNext()}> 
