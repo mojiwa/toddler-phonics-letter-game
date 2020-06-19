@@ -1,7 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
 import { ILetterData, IItemData, LanguageSelection, GameType, Page } from '../interfaces';
 import Letter from './Letter';
 import Modal from './Modal';
+import PlayAgainModal from './PlayAgainModal';
 
 interface IGameProps {
   LetterData: ILetterData[];
@@ -27,6 +30,7 @@ interface IGameState {
   Score: number;
   MouseOverImage: boolean;
   Win: boolean;
+  ShowEndGameModal: boolean;
 }
 
 const EMPTY_LETTER_DATA_ARRAY: ILetterData[] = [];
@@ -57,6 +61,7 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     Score: 0,
     MouseOverImage: false,
     Win: false,
+    ShowEndGameModal: false,
   }
 
   componentDidMount = () => {
@@ -150,11 +155,8 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
       }
     } else {
       this.setState({ 
-        ShowModal: true, 
-        ModalTitleText: 'Game over', 
+        ShowEndGameModal: true, 
         ModalText: 'Thanks for playing. You scored: ' + this.state.Score,
-        ModalNeedsCancel: false, 
-        ModalNextText: 'Play Again',
         Question: 0, 
         Score: 0
       });
@@ -167,6 +169,8 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     } else {
       return (
         <div className='w-4/5 md:w-3/5 mx-auto bg-yellow-500 rounded-lg p-4 mt-2 md:mt-10 shadow-2xl'>
+
+          {/* Modals */}
           <Modal 
             ShowModal={this.state.ShowModal} 
             ModalCancelText='Try Again' 
@@ -176,6 +180,13 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
             ModalTitle={this.state.ModalTitleText} 
             ModalText={this.state.ModalText}
             ModalNeedsCancel={this.state.ModalNeedsCancel} />
+          <PlayAgainModal 
+            ShowModal={this.state.ShowEndGameModal}
+            ModalText={this.state.ModalText}
+            SetPage={this.props.SetPage}
+            ModalOnCancel={() => { this.setState({ShowEndGameModal: false}); this.nextImage(); }} />
+
+          {/* Image */}
           <div className='text-center text-purple-700 font-bold md:text-xl'>What sound does the image below begin with?</div>
           <div className='mobile-image-tap text-center text-purple-700'>Tap image to listen</div>
           <div className='flex justify-center'>            
@@ -191,6 +202,8 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
               onClick={() => this.playSound(this.props.LanguageSelection === LanguageSelection.British ? this.state.SelectedItems[0].BritishAudioUrl : this.state.SelectedItems[0].AmericanAudioUrl)}/>
           </div>
+
+          {/* Letters */}
           <div className='flex justify-center'>
             {this.state.LetterSelection.map(letter => (
               <li key={letter.Letter}>
@@ -211,6 +224,8 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
                 Score: {this.state.Score}/5
               </div>
             </div>
+
+            {/* Scores and Next */}
             <div className='mt-2 text-purple-700 md:text-purple-600 hover:text-purple-700' onClick={() => this.onNext()}> 
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 480 480" fill="currentColor" className='h-16 md:h-24'>
                 <g>
