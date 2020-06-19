@@ -26,6 +26,7 @@ interface IGameState {
   Question: number;
   Score: number;
   MouseOverImage: boolean;
+  Win: boolean;
 }
 
 const EMPTY_LETTER_DATA_ARRAY: ILetterData[] = [];
@@ -35,8 +36,8 @@ const EMPTY_LETTER_DATA: ILetterData = {
   IsSelected: false,
   Set: 0,
   AmericanAudioUrl: '', 
-  BritishAudioUrl: '',  
-}
+  BritishAudioUrl: '',
+};
 
 /**
  * Displays the list of items corresponding to the phonics/letters the user has selected
@@ -54,7 +55,8 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
     ModalNextText: 'Next',
     Question: 1,
     Score: 0,
-    MouseOverImage: false
+    MouseOverImage: false,
+    Win: false,
   }
 
   componentDidMount = () => {
@@ -115,10 +117,14 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
       ModalText: 'Feel free to try again or skip to the next question', 
       ModalNeedsCancel: !win, 
       ModalNextText: 'Skip',
-      Score: win ? this.state.Score+1 : this.state.Score }, () => {
-        if (win)
-          this.nextImage();
-      });
+      Score: win ? this.state.Score+1 : this.state.Score,
+      Win: win});
+    if (win) {
+      setTimeout(() => {
+        this.setState({Win: false}); 
+        this.nextImage();
+      }, 2000);
+    }
   }
 
   nextImage = () => {
@@ -174,9 +180,12 @@ export default class Game extends React.PureComponent<IGameProps, IGameState> {
           <div className='mobile-image-tap text-center text-purple-700'>Tap image to listen</div>
           <div className='flex justify-center'>            
             <div className={`${this.state.MouseOverImage ? '' : 'hidden'} absolute self-center text-gray-900 text-lg md:text-2xl`}>Click to listen</div>
+            <div className={`${this.state.Win ? 'opacity-100' : 'opacity-0'} p-4 duration-500 ease-in-out transform absolute self-center text-gray-900 text-lg md:text-2xl rounded-lg border-4 border-solid border-purple-700`}>
+              Well done!
+            </div>
             <img 
               id='game-image'
-              className={`${this.state.MouseOverImage ? 'opacity-25' : ''} shadow-xl border-solid border-4 border-purple-700 mb-5 mt-5 duration-300 ease-in-out md:w-3/5`}
+              className={`${this.state.MouseOverImage ? 'opacity-25' : ''} ${this.state.Win ? 'pointer-events-none opacity-0' : ''} shadow-xl border-solid border-4 border-purple-700 mb-5 mt-5 duration-300 ease-in-out md:w-3/5`}
               onMouseOver={() => this.setState({ MouseOverImage: true })}
               onMouseLeave={() => this.setState({ MouseOverImage: false })}
               src={this.state.SelectedItems[0].ImageUrl} alt={this.state.SelectedItems[0].Item} 
