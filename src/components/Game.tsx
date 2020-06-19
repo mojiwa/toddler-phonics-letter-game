@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import { ILetterData, IItemData, LanguageSelection, GameType, Page } from '../interfaces';
 import Letter from './Letter';
